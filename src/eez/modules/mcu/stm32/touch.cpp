@@ -45,11 +45,11 @@ namespace touch {
 static const int CONF_TOUCH_PRESSED_DEBOUNCE_TIMEOUT_MS = 10;
 static const int CONF_TOUCH_NOT_PRESSED_DEBOUNCE_TIMEOUT_MS = 25;
 
-static const int CONF_TOUCH_Z1_THRESHOLD = 50;
+static const int CONF_TOUCH_Z1_THRESHOLD = 75;
 
-static const uint8_t  X_DATA_ID = 0b11000010;
-static const uint8_t  Y_DATA_ID = 0b11010010;
-static const uint8_t Z1_DATA_ID = 0b11100010;
+static const uint8_t  X_DATA_ID = 0b11000000;
+static const uint8_t  Y_DATA_ID = 0b11010000;
+static const uint8_t Z1_DATA_ID = 0b11100000;
 
 enum State {
     STATE_NOT_PRESSED,
