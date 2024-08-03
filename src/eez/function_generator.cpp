@@ -2786,7 +2786,8 @@ void data_function_generator_duty_cycle(DataOperationEnum operation, Cursor curs
 	}
 
 	if (operation == DATA_OPERATION_GET) {
-		bool focused = g_focusCursor == cursor && g_focusDataId == DATA_ID_DIB_MIO168_PWM_DUTY;
+		//bool focused = g_focusCursor == cursor && g_focusDataId == DATA_ID_DIB_MIO168_PWM_DUTY;
+		bool focused = g_focusCursor == cursor;
 		if (focused && g_focusEditValue.getType() != VALUE_TYPE_NONE) {
 			value = g_focusEditValue;
 		} else if (focused && getActivePageId() == PAGE_ID_EDIT_MODE_KEYPAD && edit_mode_keypad::g_keypad->isEditing()) {

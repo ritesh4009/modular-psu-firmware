@@ -9,40 +9,16 @@
       "scpiDocFolder": "docs\\SCPI reference guide\\Commands",
       "imports": [
         {
-          "objID": "70e48ba1-a593-86b0-e5d5-53724a68d9a2",
-          "projectFilePath": "src\\eez\\modules\\dib-mio168\\dib-mio168.eez-project"
-        },
-        {
-          "objID": "6f21bf35-aeaf-b53e-dc72-d9965d4858b3",
-          "projectFilePath": "src\\eez\\modules\\dib-prel6\\dib-prel6.eez-project"
-        },
-        {
-          "objID": "c9e2a05d-c44e-d7ab-7c39-ae94f4914347",
-          "projectFilePath": "src\\eez\\modules\\dib-smx46\\dib-smx46.eez-project"
-        },
-        {
-          "objID": "cfcd6e0a-9683-6067-4b43-c92c798903d4",
-          "projectFilePath": "src\\eez\\modules\\psu\\psu.eez-project"
-        },
-        {
-          "objID": "8482aa6c-e29b-3738-5c47-693dfe602f60",
-          "projectFilePath": "src\\eez\\modules\\dib-dcp405\\dib-dcp405.eez-project"
-        },
-        {
-          "objID": "a04f0b99-10eb-4280-935f-345f96af5898",
-          "projectFilePath": "src\\eez\\modules\\dib-dcm220\\dib-dcm220.eez-project"
-        },
-        {
           "objID": "d187373c-ab96-2639-679c-decaf607e416",
           "projectFilePath": "src\\eez\\modules\\simulator\\simulator.eez-project"
         },
         {
-          "objID": "06f92568-6497-d7e5-f582-6255af700a76",
-          "projectFilePath": "src\\eez\\modules\\dib-dcm224\\dib-dcm224.eez-project"
+          "objID": "c31ab945-2d22-4e07-9d75-9f0b281e4a71",
+          "projectFilePath": "src\\eez\\modules\\dib-dcp405\\dib-dcp405.eez-project"
         },
         {
-          "objID": "b2ebb2f3-ce3d-818a-b801-dbcb77f3e5b4",
-          "projectFilePath": "src\\eez\\modules\\dib-mux14d\\dib-mux14d.eez-project"
+          "objID": "d0299a06-3fab-4323-f4a5-25aba3c96ca0",
+          "projectFilePath": "src\\eez\\modules\\dib-dcm242\\dib-dcm242.eez-project"
         }
       ],
       "displayWidth": 480,
@@ -9306,7 +9282,7 @@
               "widgets": [
                 {
                   "objID": "21313c08-77c6-79f0-1506-cd5af94da772",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -9318,11 +9294,11 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert"
+                  "userWidgetPageName": "slot_def_vert"
                 },
                 {
                   "objID": "913def3e-6ddb-f192-a19c-051ea207eb2f",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -9334,11 +9310,11 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert"
+                  "userWidgetPageName": "slot_def_vert"
                 },
                 {
                   "objID": "c5019fe4-6bf8-7a85-68d3-352e01f9540c",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -9350,11 +9326,11 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz"
+                  "userWidgetPageName": "slot_def_horz"
                 },
                 {
                   "objID": "e29001aa-801c-e3dd-2c9d-027cf164c1f9",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -9366,13 +9342,13 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz"
+                  "userWidgetPageName": "slot_def_horz"
                 }
               ]
             },
             {
               "objID": "875dd6df-42fe-6281-8fa2-3841687783cc",
-              "type": "LayoutView",
+              "type": "UserWidgetWidget",
               "left": 0,
               "top": 0,
               "width": 480,
@@ -9385,7 +9361,7 @@
                 "inheritFrom": "default"
               },
               "timeline": [],
-              "layout": "",
+              "userWidgetPageName": "",
               "context": "slot_max_channel_index"
             }
           ]
@@ -46534,7 +46510,7 @@
       "components": [
         {
           "objID": "df620dc5-7633-3037-0ec2-b9425ab05367",
-          "type": "LayoutView",
+          "type": "UserWidgetWidget",
           "left": 0,
           "top": 0,
           "width": 158,
@@ -46547,12 +46523,12 @@
             "inheritFrom": "default"
           },
           "timeline": [],
-          "layout": "",
+          "userWidgetPageName": "",
           "context": "slot1_non_mapped_channel_index"
         },
         {
           "objID": "277aefed-abd6-360e-0c03-26ebfb1817c7",
-          "type": "LayoutView",
+          "type": "UserWidgetWidget",
           "left": 161,
           "top": 0,
           "width": 158,
@@ -46565,12 +46541,12 @@
             "inheritFrom": "default"
           },
           "timeline": [],
-          "layout": "",
+          "userWidgetPageName": "",
           "context": "slot2_non_mapped_channel_index"
         },
         {
           "objID": "c51bab7c-4dbe-2f0d-2194-044e55832761",
-          "type": "LayoutView",
+          "type": "UserWidgetWidget",
           "left": 322,
           "top": 0,
           "width": 158,
@@ -46583,7 +46559,7 @@
             "inheritFrom": "default"
           },
           "timeline": [],
-          "layout": "",
+          "userWidgetPageName": "",
           "context": "slot3_non_mapped_channel_index"
         },
         {
@@ -47935,7 +47911,7 @@
                     },
                     {
                       "objID": "4818ec9a-c6fa-4f84-bf74-04f642cf0793",
-                      "type": "LayoutView",
+                      "type": "UserWidgetWidget",
                       "left": 8,
                       "top": 94,
                       "width": 376,
@@ -47947,7 +47923,7 @@
                         "inheritFrom": "default"
                       },
                       "timeline": [],
-                      "layout": "profile_basic_info"
+                      "userWidgetPageName": "profile_basic_info"
                     },
                     {
                       "objID": "67db6f18-6d70-b8c8-2d0c-14920a4a950e",
@@ -48281,7 +48257,7 @@
             },
             {
               "objID": "6a127fd7-af1a-b7fd-5535-566692e3a88e",
-              "type": "LayoutView",
+              "type": "UserWidgetWidget",
               "left": 0,
               "top": 28,
               "width": 376,
@@ -48293,7 +48269,7 @@
                 "inheritFrom": "default"
               },
               "timeline": [],
-              "layout": "profile_basic_info"
+              "userWidgetPageName": "profile_basic_info"
             }
           ],
           "layout": "static"
@@ -49137,7 +49113,7 @@
               "widgets": [
                 {
                   "objID": "1a7548d7-0bc8-450c-b147-3f2c91c22437",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 158,
@@ -49150,12 +49126,12 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert_view_with_border",
+                  "userWidgetPageName": "slot_def_vert_view_with_border",
                   "context": "slot1_channel_index"
                 },
                 {
                   "objID": "defd39bf-19ef-fa87-30cb-0c33f41ecc14",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 161,
                   "top": 0,
                   "width": 158,
@@ -49168,12 +49144,12 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert_view_with_border",
+                  "userWidgetPageName": "slot_def_vert_view_with_border",
                   "context": "slot2_channel_index"
                 },
                 {
                   "objID": "ecb2a55a-f712-39d7-db70-51dcb199f0df",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 322,
                   "top": 0,
                   "width": 158,
@@ -49186,7 +49162,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert_view_with_border",
+                  "userWidgetPageName": "slot_def_vert_view_with_border",
                   "context": "slot3_channel_index"
                 }
               ],
@@ -49209,7 +49185,7 @@
               "widgets": [
                 {
                   "objID": "d932332f-3935-e0e0-d7f2-d496c00a12bb",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 238,
@@ -49222,12 +49198,12 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert_view_with_border_2col",
+                  "userWidgetPageName": "slot_def_vert_view_with_border_2col",
                   "context": "slot1_channel_index"
                 },
                 {
                   "objID": "957b1b8c-7d14-190d-d15b-7d900e7f2cb9",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 241,
                   "top": 0,
                   "width": 239,
@@ -49240,7 +49216,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_vert_view_with_border_2col",
+                  "userWidgetPageName": "slot_def_vert_view_with_border_2col",
                   "context": "slot2_channel_index"
                 }
               ],
@@ -49297,7 +49273,7 @@
               "widgets": [
                 {
                   "objID": "235c003f-8c69-2ec1-44f5-3709090f94c5",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 2,
                   "top": 0,
                   "width": 154,
@@ -49310,7 +49286,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 },
                 {
@@ -49381,7 +49357,7 @@
               "widgets": [
                 {
                   "objID": "553125c0-a1ea-8bc3-ca81-21b970a46d47",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 158,
@@ -49394,7 +49370,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 }
               ],
@@ -49450,7 +49426,7 @@
               "widgets": [
                 {
                   "objID": "620eda3e-fa42-395b-b7da-5fa346e632ea",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 2,
                   "top": 0,
                   "width": 234,
@@ -49463,7 +49439,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 },
                 {
@@ -49534,7 +49510,7 @@
               "widgets": [
                 {
                   "objID": "10fe520b-4d4c-7156-749c-8244968d8102",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 238,
@@ -49547,7 +49523,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 }
               ],
@@ -50240,7 +50216,7 @@
               "widgets": [
                 {
                   "objID": "ef2bd37e-cac4-f78c-fc04-0861f4d547df",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -50253,12 +50229,12 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz_view_with_border",
+                  "userWidgetPageName": "slot_def_horz_view_with_border",
                   "context": "slot1_channel_index"
                 },
                 {
                   "objID": "dfca447c-c69f-5594-50f6-930dbb0a1fdb",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 80,
                   "width": 480,
@@ -50271,12 +50247,12 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz_view_with_border",
+                  "userWidgetPageName": "slot_def_horz_view_with_border",
                   "context": "slot2_channel_index"
                 },
                 {
                   "objID": "d61c0e4f-2f66-670b-25d7-93b9cec498e3",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 160,
                   "width": 480,
@@ -50289,7 +50265,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz_view_with_border",
+                  "userWidgetPageName": "slot_def_horz_view_with_border",
                   "context": "slot3_channel_index"
                 }
               ],
@@ -50312,7 +50288,7 @@
               "widgets": [
                 {
                   "objID": "e53352cd-b65a-a6a9-602f-5909fe953702",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -50325,12 +50301,12 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz_view_with_border_2col",
+                  "userWidgetPageName": "slot_def_horz_view_with_border_2col",
                   "context": "slot1_channel_index"
                 },
                 {
                   "objID": "a6794cc3-a3f6-9117-1018-fd6c4c588dbc",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 120,
                   "width": 480,
@@ -50343,7 +50319,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "slot_def_horz_view_with_border_2col",
+                  "userWidgetPageName": "slot_def_horz_view_with_border_2col",
                   "context": "slot2_channel_index"
                 }
               ],
@@ -50400,7 +50376,7 @@
               "widgets": [
                 {
                   "objID": "fa55892c-e21a-022d-e634-d852fa54a5af",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 2,
                   "width": 478,
@@ -50413,7 +50389,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 },
                 {
@@ -50484,7 +50460,7 @@
               "widgets": [
                 {
                   "objID": "57069e94-2077-5b4b-4a25-f6f9898ca456",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -50497,7 +50473,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 }
               ],
@@ -50554,7 +50530,7 @@
               "widgets": [
                 {
                   "objID": "1573911d-4796-2c39-39d8-fe40f9f1669e",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 2,
                   "width": 478,
@@ -50567,7 +50543,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 },
                 {
@@ -50638,7 +50614,7 @@
               "widgets": [
                 {
                   "objID": "c8993a1e-f1ef-2ff4-cc0a-0eaabf7a0dcc",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 0,
                   "top": 0,
                   "width": 480,
@@ -50651,7 +50627,7 @@
                     "inheritFrom": "default"
                   },
                   "timeline": [],
-                  "layout": "",
+                  "userWidgetPageName": "",
                   "context": ""
                 }
               ],
@@ -53630,7 +53606,7 @@
                         },
                         {
                           "objID": "82da8fc4-5a42-4ff1-b5ee-d2cf8ab0195e",
-                          "type": "LayoutView",
+                          "type": "UserWidgetWidget",
                           "left": 320,
                           "top": 0,
                           "width": 160,
@@ -53642,7 +53618,7 @@
                             "inheritFrom": "default"
                           },
                           "timeline": [],
-                          "layout": "dlog_view_drawer"
+                          "userWidgetPageName": "dlog_view_drawer"
                         }
                       ],
                       "layout": "static"
@@ -58211,7 +58187,7 @@
               "widgets": [
                 {
                   "objID": "179d2c49-23c0-29e3-5d31-fbf70d79bb36",
-                  "type": "LayoutView",
+                  "type": "UserWidgetWidget",
                   "left": 4,
                   "top": 0,
                   "width": 440,
@@ -62196,7 +62172,8 @@
     {
       "objID": "1fa3ca3f-c1be-b150-27a6-4dfeb2812d6f",
       "name": "encoder_cursor_14_enabled",
-      "inheritFrom": "encoder_cursor_enabled"
+      "inheritFrom": "encoder_cursor_enabled",
+      "alwaysBuild": true
     },
     {
       "objID": "081c6914-5792-4424-9441-bea3e5ca0665",
@@ -62208,6 +62185,7 @@
       "objID": "c12000b6-cfb9-7064-b176-dea730439c4f",
       "name": "encoder_cursor_14_right_enabled",
       "inheritFrom": "encoder_cursor_enabled",
+      "alwaysBuild": true,
       "alignHorizontal": "right"
     },
     {
@@ -103571,7 +103549,8 @@
       "idfSupportedModels": "EEZ-BB3-STM32",
       "idfRevisionComments": "Initial version",
       "idfAuthor": "Envox",
-      "sdlFriendlyName": "EEZ BB3 STM32"
+      "sdlFriendlyName": "EEZ BB3 STM32",
+      "useDashboardProjects": []
     },
     {
       "objID": "1655c90d-63cf-5c8b-937b-0fdac3a3e571",
@@ -103592,7 +103571,8 @@
       "idfSupportedModels": "EEZ-BB3-SIM",
       "idfRevisionComments": "Initial version",
       "idfAuthor": "Envox",
-      "sdlFriendlyName": "EEZ BB3 Simulator"
+      "sdlFriendlyName": "EEZ BB3 Simulator",
+      "useDashboardProjects": []
     }
   ],
   "colors": [

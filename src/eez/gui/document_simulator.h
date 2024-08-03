@@ -503,149 +503,16 @@ enum DataEnum {
     DATA_ID_SYS_SETTINGS_SCRIPTING_AUTO_START_CONFIRMATION = 501,
     DATA_ID_SYS_SETTINGS_SCRIPTING_AUTO_START_SCRIPT_ENABLED = 502,
     DATA_ID_SYS_PROHIBIT_OUTPUT_ENABLE_IF_EXTERNAL_VOLTAGE_DETECTED = 503,
-    DATA_ID_DIB_MIO168_DIN_PINS = 504,
-    DATA_ID_DIB_MIO168_DIN_PINS_1_4 = 505,
-    DATA_ID_DIB_MIO168_DIN_PINS_5_8 = 506,
-    DATA_ID_DIB_MIO168_DIN_NO = 507,
-    DATA_ID_DIB_MIO168_DIN_STATE = 508,
-    DATA_ID_DIB_MIO168_DIN_RANGE = 509,
-    DATA_ID_DIB_MIO168_DIN_LABEL = 510,
-    DATA_ID_DIB_MIO168_DIN_LABEL_LABEL = 511,
-    DATA_ID_DIB_MIO168_DIN_SPEED = 512,
-    DATA_ID_DIB_MIO168_DOUT_PINS = 513,
-    DATA_ID_DIB_MIO168_DOUT_PINS_1_4 = 514,
-    DATA_ID_DIB_MIO168_DOUT_PINS_5_8 = 515,
-    DATA_ID_DIB_MIO168_DOUT_NO = 516,
-    DATA_ID_DIB_MIO168_DOUT_STATE = 517,
-    DATA_ID_DIB_MIO168_DOUT_LABEL = 518,
-    DATA_ID_DIB_MIO168_DOUT_LABEL_LABEL = 519,
-    DATA_ID_DIB_MIO168_DOUT_TRIGGER_MODE = 520,
-    DATA_ID_DIB_MIO168_DOUT_TRIGGER_IS_INITIATED = 521,
-    DATA_ID_DIB_MIO168_DOUT_FUNCTION_LABEL = 522,
-    DATA_ID_DIB_MIO168_AIN_CHANNELS = 523,
-    DATA_ID_DIB_MIO168_AIN_LABEL = 524,
-    DATA_ID_DIB_MIO168_AIN_LABEL_SHORT = 525,
-    DATA_ID_DIB_MIO168_AIN_LABEL_LABEL = 526,
-    DATA_ID_DIB_MIO168_AIN_VALUE = 527,
-    DATA_ID_DIB_MIO168_AIN_MODE = 528,
-    DATA_ID_DIB_MIO168_AIN_RANGE = 529,
-    DATA_ID_DIB_MIO168_AIN_IS_DLOG_ACTIVE = 530,
-    DATA_ID_DIB_MIO168_AIN_MODE_AND_RANGE = 531,
-    DATA_ID_DIB_MIO168_AIN_MODE_IS_MULTIPLE_SELECTION_AVAILABLE = 532,
-    DATA_ID_DIB_MIO168_AIN_RANGE_IS_MULTIPLE_SELECTION_AVAILABLE = 533,
-    DATA_ID_DIB_MIO168_AIN_IS_OVERFLOW = 534,
-    DATA_ID_DIB_MIO168_AIN_HAS_POWER_COLUMN = 535,
-    DATA_ID_DIB_MIO168_AIN_HAS_P1 = 536,
-    DATA_ID_DIB_MIO168_AIN_P1 = 537,
-    DATA_ID_DIB_MIO168_AIN_HAS_P2 = 538,
-    DATA_ID_DIB_MIO168_AIN_P2 = 539,
-    DATA_ID_DIB_MIO168_AIN_HAS_EFFICIENCY = 540,
-    DATA_ID_DIB_MIO168_AIN_CALC_EFFICIENCY = 541,
-    DATA_ID_DIB_MIO168_AIN_EFFICIENCY = 542,
-    DATA_ID_DIB_MIO168_AIN_ACTIVE_POWER = 543,
-    DATA_ID_DIB_MIO168_AIN_REACTIVE_POWER = 544,
-    DATA_ID_DIB_MIO168_AIN_VOLT_RMS = 545,
-    DATA_ID_DIB_MIO168_AIN_CURR_RMS = 546,
-    DATA_ID_DIB_MIO168_AIN_APPARENT_POWER = 547,
-    DATA_ID_DIB_MIO168_AIN_POWER_FACTOR = 548,
-    DATA_ID_DIB_MIO168_AIN_NPLC = 549,
-    DATA_ID_DIB_MIO168_AIN_APERTURE = 550,
-    DATA_ID_DIB_MIO168_AIN_EFFICIENCY_FORMULA = 551,
-    DATA_ID_DIB_MIO168_AIN_IS_AUTO_RANGE = 552,
-    DATA_ID_DIB_MIO168_AIN_IS_ERROR = 553,
-    DATA_ID_DIB_MIO168_IS_NO_AFE = 554,
-    DATA_ID_DIB_MIO168_AC_ANALYSIS_ENABLED = 555,
-    DATA_ID_DIB_MIO168_AOUT_CHANNELS = 556,
-    DATA_ID_DIB_MIO168_AOUT_LABEL = 557,
-    DATA_ID_DIB_MIO168_AOUT_LABEL_SHORT = 558,
-    DATA_ID_DIB_MIO168_AOUT_LABEL_LABEL = 559,
-    DATA_ID_DIB_MIO168_AOUT_VALUE = 560,
-    DATA_ID_DIB_MIO168_AOUT_VALUE_IS_OFF = 561,
-    DATA_ID_DIB_MIO168_AC_ANALYSIS_ALLOWED = 562,
-    DATA_ID_DIB_MIO168_AOUT_OUTPUT_ENABLED = 563,
-    DATA_ID_DIB_MIO168_AOUT_OUTPUT_MODE = 564,
-    DATA_ID_DIB_MIO168_AOUT_VOLTAGE_RANGE = 565,
-    DATA_ID_DIB_MIO168_AOUT_CURRENT_RANGE = 566,
-    DATA_ID_DIB_MIO168_AOUT_CHANNEL_HAS_SETTINGS = 567,
-    DATA_ID_DIB_MIO168_AOUT_MODE_AND_RANGE = 568,
-    DATA_ID_DIB_MIO168_AOUT_TRIGGER_MODE = 569,
-    DATA_ID_DIB_MIO168_AOUT_TRIGGER_IS_INITIATED = 570,
-    DATA_ID_DIB_MIO168_AOUT_FUNCTION_LABEL = 571,
-    DATA_ID_DIB_MIO168_PWM_CHANNELS = 572,
-    DATA_ID_DIB_MIO168_PWM_LABEL = 573,
-    DATA_ID_DIB_MIO168_PWM_LABEL_SHORT = 574,
-    DATA_ID_DIB_MIO168_PWM_LABEL_LABEL = 575,
-    DATA_ID_DIB_MIO168_PWM_FREQ = 576,
-    DATA_ID_DIB_MIO168_PWM_DUTY = 577,
-    DATA_ID_DIB_MIO168_DIN_HAS_SPEED = 578,
-    DATA_ID_DIB_MIO168_AFE_VERSION = 579,
-    DATA_ID_DIB_MIO168_PAGER_LIST = 580,
-    DATA_ID_DIB_MIO168_PAGER_IS_SELECTED = 581,
-    DATA_ID_DIB_MIO168_PAGER_SELECTED_PAGE = 582,
-    DATA_ID_DIB_MIO168_SELECTED_PAGE_IN_DEFAULT_VIEW = 583,
-    DATA_ID_DIB_MIO168_SIMULATOR_AFE_VERSION = 584,
-    DATA_ID_DIB_MIO168_IS_SETTINGS_PAGE_SELECTED = 585,
-    DATA_ID_DIB_PREL6_RELAYS = 586,
-    DATA_ID_DIB_PREL6_RELAY_IS_ON = 587,
-    DATA_ID_DIB_PREL6_RELAY_LABEL = 588,
-    DATA_ID_DIB_PREL6_RELAY_CYCLES = 589,
-    DATA_ID_DIB_PREL6_RELAY_LABEL_LABEL = 590,
-    DATA_ID_DIB_PREL6_IS_RELAY_1_OR_6 = 591,
-    DATA_ID_DIB_SMX46_ROUTES = 592,
-    DATA_ID_DIB_SMX46_ROUTE_OPEN = 593,
-    DATA_ID_DIB_SMX46_X_LABELS = 594,
-    DATA_ID_DIB_SMX46_X_LABEL = 595,
-    DATA_ID_DIB_SMX46_Y_LABELS = 596,
-    DATA_ID_DIB_SMX46_Y_LABEL = 597,
-    DATA_ID_DIB_SMX46_AOUT_CHANNELS = 598,
-    DATA_ID_DIB_SMX46_AOUT_VALUE = 599,
-    DATA_ID_DIB_SMX46_AOUT_LABEL = 600,
-    DATA_ID_DIB_SMX46_AOUT_TRIGGER_MODE = 601,
-    DATA_ID_DIB_SMX46_AOUT_TRIGGER_IS_INITIATED = 602,
-    DATA_ID_DIB_SMX46_AOUT_FUNCTION_LABEL = 603,
-    DATA_ID_DIB_SMX46_RELAY_ON = 604,
-    DATA_ID_DIB_SMX46_SIGNAL_RELAY_CYCLES = 605,
-    DATA_ID_DIB_SMX46_POWER_RELAY_CYCLES = 606,
-    DATA_ID_DIB_DCP405_CHANNEL_OFF_STATUS = 607,
-    DATA_ID_DIB_DCM220_SLOT_DEF_2CH_VIEW = 608,
-    DATA_ID_DIB_DCM220_SLOT_2CH_CH1_INDEX = 609,
-    DATA_ID_DIB_DCM220_SLOT_2CH_CH2_INDEX = 610,
-    DATA_ID_FRONT_PANEL_SLOT1_VIEW = 611,
-    DATA_ID_SIMULATOR_LOAD_STATE = 612,
-    DATA_ID_SIMULATOR_LOAD_STATE2 = 613,
-    DATA_ID_SIMULATOR_LOAD = 614,
-    DATA_ID_SIMULATOR_LOAD2 = 615,
-    DATA_ID_MAIN_APP_VIEW = 616,
-    DATA_ID_FRONT_PANEL_SLOT2_VIEW = 617,
-    DATA_ID_FRONT_PANEL_SLOT3_VIEW = 618,
-    DATA_ID_DIB_DCM224_PWM_FREQUENCY = 619,
-    DATA_ID_DIB_DCM224_PWM_DUTY = 620,
-    DATA_ID_DIB_DCM224_COUNTERPHASE_FREQUENCY = 621,
-    DATA_ID_DIB_DCM224_COUNTERPHASE_DITHERING = 622,
-    DATA_ID_DIB_DCM224_PWM_ENABLED = 623,
-    DATA_ID_DIB_DCM224_SLOT_DEF_2CH_VIEW = 624,
-    DATA_ID_DIB_DCM224_SLOT_2CH_CH1_INDEX = 625,
-    DATA_ID_DIB_DCM224_SLOT_2CH_CH2_INDEX = 626,
-    DATA_ID_DIB_MUX14D_P1_RELAYS = 627,
-    DATA_ID_DIB_MUX14D_P1_RELAY_LABEL = 628,
-    DATA_ID_DIB_MUX14D_P1_RELAY_IS_FIRST = 629,
-    DATA_ID_DIB_MUX14D_P1_RELAY_IS_ON = 630,
-    DATA_ID_DIB_MUX14D_P1_RELAY_CYCLES = 631,
-    DATA_ID_DIB_MUX14D_P1_RELAY_LABEL_LABEL = 632,
-    DATA_ID_DIB_MUX14D_P2_RELAYS = 633,
-    DATA_ID_DIB_MUX14D_P2_RELAY_LABEL = 634,
-    DATA_ID_DIB_MUX14D_P2_RELAY_IS_FIRST = 635,
-    DATA_ID_DIB_MUX14D_P2_RELAY_IS_ON = 636,
-    DATA_ID_DIB_MUX14D_P2_RELAY_CYCLES = 637,
-    DATA_ID_DIB_MUX14D_P2_RELAY_LABEL_LABEL = 638,
-    DATA_ID_DIB_MUX14D_EXT_RELAY_IS_ON = 639,
-    DATA_ID_DIB_MUX14D_EXT_RELAY_CYCLES = 640,
-    DATA_ID_DIB_MUX14D_ADIB1_RELAY_IS_ON = 641,
-    DATA_ID_DIB_MUX14D_ADIB1_RELAY_CYCLES = 642,
-    DATA_ID_DIB_MUX14D_ADIB2_RELAY_IS_ON = 643,
-    DATA_ID_DIB_MUX14D_ADIB2_RELAY_CYCLES = 644,
-    DATA_ID_DIB_MUX14D_CJ_TEMP = 645,
-    DATA_ID_DIB_MUX14D_MULTIPLE_CONNECTIONS = 646
+    DATA_ID_FRONT_PANEL_SLOT1_VIEW = 504,
+    DATA_ID_SIMULATOR_LOAD_STATE = 505,
+    DATA_ID_SIMULATOR_LOAD_STATE2 = 506,
+    DATA_ID_SIMULATOR_LOAD = 507,
+    DATA_ID_SIMULATOR_LOAD2 = 508,
+    DATA_ID_MAIN_APP_VIEW = 509,
+    DATA_ID_FRONT_PANEL_SLOT2_VIEW = 510,
+    DATA_ID_FRONT_PANEL_SLOT3_VIEW = 511,
+    DATA_ID_DIB_DCP405_CHANNEL_OFF_STATUS = 512,
+    DATA_ID_DIB_DCM242_SLOT_DEF_2CH_VIEW = 513
 };
 
 void data_none(DataOperationEnum operation, Cursor cursor, Value &value);
@@ -1152,113 +1019,6 @@ void data_sys_settings_scripting_auto_start_script(DataOperationEnum operation, 
 void data_sys_settings_scripting_auto_start_confirmation(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_sys_settings_scripting_auto_start_script_enabled(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_sys_prohibit_output_enable_if_external_voltage_detected(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_pins(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_pins_1_4(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_pins_5_8(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_no(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_state(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_speed(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_pins(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_pins_1_4(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_pins_5_8(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_no(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_state(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_trigger_mode(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_trigger_is_initiated(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_dout_function_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_channels(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_label_short(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_value(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_mode(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_is_dlog_active(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_mode_and_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_mode_is_multiple_selection_available(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_range_is_multiple_selection_available(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_is_overflow(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_has_power_column(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_has_p1(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_p1(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_has_p2(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_p2(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_has_efficiency(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_calc_efficiency(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_efficiency(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_active_power(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_reactive_power(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_volt_rms(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_curr_rms(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_apparent_power(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_power_factor(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_nplc(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_aperture(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_efficiency_formula(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_is_auto_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ain_is_error(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_is_no_afe(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ac_analysis_enabled(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_channels(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_label_short(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_value(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_value_is_off(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_ac_analysis_allowed(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_output_enabled(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_output_mode(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_voltage_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_current_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_channel_has_settings(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_mode_and_range(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_trigger_mode(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_trigger_is_initiated(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_aout_function_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pwm_channels(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pwm_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pwm_label_short(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pwm_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pwm_freq(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pwm_duty(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_din_has_speed(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_afe_version(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pager_list(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pager_is_selected(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_pager_selected_page(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_selected_page_in_default_view(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_simulator_afe_version(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mio168_is_settings_page_selected(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_prel6_relays(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_prel6_relay_is_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_prel6_relay_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_prel6_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_prel6_relay_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_prel6_is_relay_1_or_6(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_routes(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_route_open(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_x_labels(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_x_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_y_labels(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_y_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_aout_channels(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_aout_value(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_aout_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_aout_trigger_mode(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_aout_trigger_is_initiated(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_aout_function_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_relay_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_signal_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_smx46_power_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcp405_channel_off_status(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm220_slot_def_2ch_view(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm220_slot_2ch_ch1_index(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm220_slot_2ch_ch2_index(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_front_panel_slot1_view(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_simulator_load_state(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_simulator_load_state2(DataOperationEnum operation, Cursor cursor, Value &value);
@@ -1267,34 +1027,8 @@ void data_simulator_load2(DataOperationEnum operation, Cursor cursor, Value &val
 void data_main_app_view(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_front_panel_slot2_view(DataOperationEnum operation, Cursor cursor, Value &value);
 void data_front_panel_slot3_view(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_pwm_frequency(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_pwm_duty(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_counterphase_frequency(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_counterphase_dithering(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_pwm_enabled(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_slot_def_2ch_view(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_slot_2ch_ch1_index(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_dcm224_slot_2ch_ch2_index(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p1_relays(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p1_relay_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p1_relay_is_first(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p1_relay_is_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p1_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p1_relay_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p2_relays(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p2_relay_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p2_relay_is_first(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p2_relay_is_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p2_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_p2_relay_label_label(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_ext_relay_is_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_ext_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_adib1_relay_is_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_adib1_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_adib2_relay_is_on(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_adib2_relay_cycles(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_cj_temp(DataOperationEnum operation, Cursor cursor, Value &value);
-void data_dib_mux14d_multiple_connections(DataOperationEnum operation, Cursor cursor, Value &value);
+void data_dib_dcp405_channel_off_status(DataOperationEnum operation, Cursor cursor, Value &value);
+void data_dib_dcm242_slot_def_2ch_view(DataOperationEnum operation, Cursor cursor, Value &value);
 
 typedef void (*DataOperationsFunction)(DataOperationEnum operation, Cursor cursor, Value &value);
 
@@ -1583,76 +1317,10 @@ enum ActionsEnum {
     ACTION_ID_SYS_SETTINGS_SCRIPTING_TOGGLE_AUTO_START_CONFIRMATION = 279,
     ACTION_ID_SYS_SETTINGS_SCRIPTING_CLEAR_AUTO_START_SCRIPT = 280,
     ACTION_ID_TOGGLE_SYS_PROHIBIT_OUTPUT_ENABLE_IF_EXTERNAL_VOLTAGE_DETECTED = 281,
-    ACTION_ID_DIB_MIO168_DIN_SHOW_CONFIGURATION = 282,
-    ACTION_ID_DIB_MIO168_DIN_SELECT_RANGE = 283,
-    ACTION_ID_DIB_MIO168_DIN_SELECT_SPEED = 284,
-    ACTION_ID_DIB_MIO168_DOUT_TOGGLE_STATE = 285,
-    ACTION_ID_DIB_MIO168_DOUT_SELECT_TRIGGER_MODE = 286,
-    ACTION_ID_DIB_MIO168_DOUT_SHOW_CONFIGURATION = 287,
-    ACTION_ID_DIB_MIO168_DOUT_SHOW_FUNCTION = 288,
-    ACTION_ID_DIB_MIO168_AIN_SHOW_CONFIGURATION = 289,
-    ACTION_ID_DIB_MIO168_AIN_SELECT_MODE = 290,
-    ACTION_ID_DIB_MIO168_AIN_SELECT_RANGE = 291,
-    ACTION_ID_DIB_MIO168_AIN_CHANGE_LABEL = 292,
-    ACTION_ID_DIB_MIO168_AIN_SELECT_MODE_AND_RANGE = 293,
-    ACTION_ID_DIB_MIO168_AIN_TOGGLE_EFFICIENCY_FORMULA = 294,
-    ACTION_ID_DIB_MIO168_AOUT_TOGGLE_OUTPUT_ENABLED = 295,
-    ACTION_ID_DIB_MIO168_AOUT_SELECT_OUTPUT_MODE = 296,
-    ACTION_ID_DIB_MIO168_AOUT_SELECT_VOLTAGE_RANGE = 297,
-    ACTION_ID_DIB_MIO168_AOUT_SELECT_CURRENT_RANGE = 298,
-    ACTION_ID_DIB_MIO168_AOUT_SELECT_MODE_AND_RANGE = 299,
-    ACTION_ID_DIB_MIO168_AOUT_SHOW_CONFIGURATION = 300,
-    ACTION_ID_DIB_MIO168_AOUT_CHANGE_LABEL = 301,
-    ACTION_ID_DIB_MIO168_AOUT_SELECT_TRIGGER_MODE = 302,
-    ACTION_ID_DIB_MIO168_AOUT_SHOW_FUNCTION = 303,
-    ACTION_ID_DIB_MIO168_SHOW_INFO = 304,
-    ACTION_ID_DIB_MIO168_SHOW_CALIBRATION = 305,
-    ACTION_ID_DIB_MIO168_SHOW_CHANNEL_LABELS = 306,
-    ACTION_ID_DIB_MIO168_SHOW_DIN_CHANNEL_LABELS = 307,
-    ACTION_ID_DIB_MIO168_SHOW_DOUT_CHANNEL_LABELS = 308,
-    ACTION_ID_DIB_MIO168_CHANGE_DIN_LABEL = 309,
-    ACTION_ID_DIB_MIO168_CHANGE_DOUT_LABEL = 310,
-    ACTION_ID_DIB_MIO168_PWM_CHANGE_LABEL = 311,
-    ACTION_ID_DIB_MIO168_PAGER_SELECT_PAGE = 312,
-    ACTION_ID_DIB_MIO168_SELECT_SIMULATOR_AFE_VERSION = 313,
-    ACTION_ID_DIB_MIO168_SHOW_SLOT_SETTINGS_IN_MAX_VIEW = 314,
-    ACTION_ID_DIB_MIO168_SELECT_PAGE_IN_DEFAULT_VIEW = 315,
-    ACTION_ID_DIB_MIO168_AIN_TOGGLE_AC_ANALYSIS = 316,
-    ACTION_ID_DIB_PREL6_TOGGLE_RELAY = 317,
-    ACTION_ID_DIB_PREL6_SHOW_RELAY_LABELS = 318,
-    ACTION_ID_DIB_PREL6_CHANGE_RELAY_LABEL = 319,
-    ACTION_ID_DIB_PREL6_SHOW_INFO = 320,
-    ACTION_ID_DIB_SMX46_TOGGLE_ROUTE = 321,
-    ACTION_ID_DIB_SMX46_TOGGLE_RELAY = 322,
-    ACTION_ID_DIB_SMX46_SHOW_CONFIGURE_ROUTES = 323,
-    ACTION_ID_DIB_SMX46_CLEAR_ALL_ROUTES = 324,
-    ACTION_ID_DIB_SMX46_CLEAR_ALL_LABELS = 325,
-    ACTION_ID_DIB_SMX46_SHOW_INFO = 326,
-    ACTION_ID_DIB_SMX46_SHOW_RELAY_CYCLES = 327,
-    ACTION_ID_DIB_SMX46_EDIT_Y_LABEL = 328,
-    ACTION_ID_DIB_SMX46_EDIT_X_LABEL = 329,
-    ACTION_ID_DIB_SMX46_CHANGE_SUBCHANNEL_LABEL = 330,
-    ACTION_ID_DIB_SMX46_AOUT_SHOW_CONFIGURATION = 331,
-    ACTION_ID_DIB_SMX46_AOUT_SELECT_TRIGGER_MODE = 332,
-    ACTION_ID_DIB_SMX46_AOUT_SHOW_FUNCTION = 333,
-    ACTION_ID_DIB_SMX46_AOUT_SHOW_CALIBRATION = 334,
-    ACTION_ID_FRONT_PANEL_SELECT_SLOT1 = 335,
-    ACTION_ID_FRONT_PANEL_SELECT_SLOT2 = 336,
-    ACTION_ID_FRONT_PANEL_SELECT_SLOT3 = 337,
-    ACTION_ID_SIMULATOR_LOAD = 338,
-    ACTION_ID_DIB_DCM224_CH_SETTINGS_ADV_TOGGLE_COUNTERPHASE_DITHERING = 339,
-    ACTION_ID_DIB_DCM224_CH_SETTINGS_ADV_TOGGLE_PWM_ENABLED = 340,
-    ACTION_ID_DIB_MUX14D_TOGGLE_P1_RELAY = 341,
-    ACTION_ID_DIB_MUX14D_CHANGE_P1_RELAY_LABEL = 342,
-    ACTION_ID_DIB_MUX14D_TOGGLE_P2_RELAY = 343,
-    ACTION_ID_DIB_MUX14D_CHANGE_P2_RELAY_LABEL = 344,
-    ACTION_ID_DIB_MUX14D_TOGGLE_EXT_RELAY = 345,
-    ACTION_ID_DIB_MUX14D_TOGGLE_ADIB1_RELAY = 346,
-    ACTION_ID_DIB_MUX14D_TOGGLE_ADIB2_RELAY = 347,
-    ACTION_ID_DIB_MUX14D_SHOW_RELAY_LABELS = 348,
-    ACTION_ID_DIB_MUX14D_SHOW_INFO = 349,
-    ACTION_ID_DIB_MUX14D_SHOW_RELAY_CYCLES = 350,
-    ACTION_ID_DIB_MUX14D_TOGGLE_MULTIPLE_CONNECTIONS = 351
+    ACTION_ID_FRONT_PANEL_SELECT_SLOT1 = 282,
+    ACTION_ID_FRONT_PANEL_SELECT_SLOT2 = 283,
+    ACTION_ID_FRONT_PANEL_SELECT_SLOT3 = 284,
+    ACTION_ID_SIMULATOR_LOAD = 285
 };
 
 void action_channel_toggle_output();
@@ -1936,76 +1604,10 @@ void action_sys_settings_scripting_select_auto_start_script();
 void action_sys_settings_scripting_toggle_auto_start_confirmation();
 void action_sys_settings_scripting_clear_auto_start_script();
 void action_toggle_sys_prohibit_output_enable_if_external_voltage_detected();
-void action_dib_mio168_din_show_configuration();
-void action_dib_mio168_din_select_range();
-void action_dib_mio168_din_select_speed();
-void action_dib_mio168_dout_toggle_state();
-void action_dib_mio168_dout_select_trigger_mode();
-void action_dib_mio168_dout_show_configuration();
-void action_dib_mio168_dout_show_function();
-void action_dib_mio168_ain_show_configuration();
-void action_dib_mio168_ain_select_mode();
-void action_dib_mio168_ain_select_range();
-void action_dib_mio168_ain_change_label();
-void action_dib_mio168_ain_select_mode_and_range();
-void action_dib_mio168_ain_toggle_efficiency_formula();
-void action_dib_mio168_aout_toggle_output_enabled();
-void action_dib_mio168_aout_select_output_mode();
-void action_dib_mio168_aout_select_voltage_range();
-void action_dib_mio168_aout_select_current_range();
-void action_dib_mio168_aout_select_mode_and_range();
-void action_dib_mio168_aout_show_configuration();
-void action_dib_mio168_aout_change_label();
-void action_dib_mio168_aout_select_trigger_mode();
-void action_dib_mio168_aout_show_function();
-void action_dib_mio168_show_info();
-void action_dib_mio168_show_calibration();
-void action_dib_mio168_show_channel_labels();
-void action_dib_mio168_show_din_channel_labels();
-void action_dib_mio168_show_dout_channel_labels();
-void action_dib_mio168_change_din_label();
-void action_dib_mio168_change_dout_label();
-void action_dib_mio168_pwm_change_label();
-void action_dib_mio168_pager_select_page();
-void action_dib_mio168_select_simulator_afe_version();
-void action_dib_mio168_show_slot_settings_in_max_view();
-void action_dib_mio168_select_page_in_default_view();
-void action_dib_mio168_ain_toggle_ac_analysis();
-void action_dib_prel6_toggle_relay();
-void action_dib_prel6_show_relay_labels();
-void action_dib_prel6_change_relay_label();
-void action_dib_prel6_show_info();
-void action_dib_smx46_toggle_route();
-void action_dib_smx46_toggle_relay();
-void action_dib_smx46_show_configure_routes();
-void action_dib_smx46_clear_all_routes();
-void action_dib_smx46_clear_all_labels();
-void action_dib_smx46_show_info();
-void action_dib_smx46_show_relay_cycles();
-void action_dib_smx46_edit_y_label();
-void action_dib_smx46_edit_x_label();
-void action_dib_smx46_change_subchannel_label();
-void action_dib_smx46_aout_show_configuration();
-void action_dib_smx46_aout_select_trigger_mode();
-void action_dib_smx46_aout_show_function();
-void action_dib_smx46_aout_show_calibration();
 void action_front_panel_select_slot1();
 void action_front_panel_select_slot2();
 void action_front_panel_select_slot3();
 void action_simulator_load();
-void action_dib_dcm224_ch_settings_adv_toggle_counterphase_dithering();
-void action_dib_dcm224_ch_settings_adv_toggle_pwm_enabled();
-void action_dib_mux14d_toggle_p1_relay();
-void action_dib_mux14d_change_p1_relay_label();
-void action_dib_mux14d_toggle_p2_relay();
-void action_dib_mux14d_change_p2_relay_label();
-void action_dib_mux14d_toggle_ext_relay();
-void action_dib_mux14d_toggle_adib1_relay();
-void action_dib_mux14d_toggle_adib2_relay();
-void action_dib_mux14d_show_relay_labels();
-void action_dib_mux14d_show_info();
-void action_dib_mux14d_show_relay_cycles();
-void action_dib_mux14d_toggle_multiple_connections();
 
 extern ActionExecFunc g_actionExecFunctions[];
 
@@ -2021,8 +1623,7 @@ enum FontsEnum {
     FONT_ID_OSWALD38 = 8,
     FONT_ID_OSWALD20 = 9,
     FONT_ID_OSWALD48 = 10,
-    FONT_ID_WEB_HOSTING_HUB24 = 11,
-    FONT_ID_DIB_MUX14D_IMAGES = 12
+    FONT_ID_WEB_HOSTING_HUB24 = 11
 };
 
 enum BitmapsEnum {
@@ -2041,16 +1642,12 @@ enum BitmapsEnum {
     BITMAP_ID_COUPLED_SERIES = 12,
     BITMAP_ID_COUPLED_CGND = 13,
     BITMAP_ID_COUPLED_SPLIT_RAILS = 14,
-    BITMAP_ID_DIB_MIO168_SIMULATOR_FRONT_PANEL_MASK = 15,
-    BITMAP_ID_DIB_PREL6_SIMULATOR_FRONT_PANEL_MASK = 16,
-    BITMAP_ID_DIB_SMX46_SIMULATOR_FRONT_PANEL_MASK = 17,
-    BITMAP_ID_DIB_DCP405_SIMULATOR_FRONT_PANEL_MASK = 18,
-    BITMAP_ID_DIB_DCP405_COUPLED_SERIES_DEF_VIEW = 19,
-    BITMAP_ID_DIB_DCP405_COUPLED_PARALLEL_DEF_VIEW = 20,
-    BITMAP_ID_DIB_DCM220_SIMULATOR_FRONT_PANEL_MASK = 21,
-    BITMAP_ID_FRONT_PANEL = 22,
-    BITMAP_ID_DIB_DCM224_SIMULATOR_FRONT_PANEL_MASK = 23,
-    BITMAP_ID_DIB_MUX14D_SIMULATOR_FRONT_PANEL_MASK = 24
+    BITMAP_ID_FRONT_PANEL = 15,
+    BITMAP_ID_DIB_DCP405_SIMULATOR_FRONT_PANEL_MASK = 16,
+    BITMAP_ID_DIB_DCP405_COUPLED_SERIES_DEF_VIEW = 17,
+    BITMAP_ID_DIB_DCP405_COUPLED_PARALLEL_DEF_VIEW = 18,
+    BITMAP_ID_DIB_DCM242_COUPLED_SERIES_DEF_VIEW = 19,
+    BITMAP_ID_DIB_DCM242_COUPLED_PARALLEL_DEF_VIEW = 20
 };
 
 enum StylesEnum {
@@ -2093,100 +1690,100 @@ enum StylesEnum {
     STYLE_ID_SELECT_ENUM_ITEM_POPUP_ITEM_S = 36,
     STYLE_ID_SELECT_ENUM_ITEM_POPUP_DISABLED_ITEM = 37,
     STYLE_ID_SELECT_ENUM_ITEM_POPUP_DISABLED_ITEM_S = 38,
-    STYLE_ID_ENCODER_CURSOR_14_DISABLED = 39,
-    STYLE_ID_ENCODER_CURSOR_14_RIGHT_DISABLED = 40,
-    STYLE_ID_INFO_ALERT = 41,
-    STYLE_ID_MENU_WITH_BUTTONS_MESSAGE = 42,
-    STYLE_ID_MENU_WITH_BUTTONS_CONTAINER = 43,
-    STYLE_ID_MENU_WITH_BUTTONS_BUTTON = 44,
-    STYLE_ID_CHANNEL1 = 45,
-    STYLE_ID_DIB_DCP405_CHANNEL_OFF_BUTTON_20_PROHIBIT = 46,
-    STYLE_ID_DEFAULT_M = 47,
-    STYLE_ID_INLINE48 = 48,
-    STYLE_ID_INLINE49 = 49,
-    STYLE_ID_INLINE50 = 50,
-    STYLE_ID_PROGRESS = 51,
+    STYLE_ID_ENCODER_CURSOR_14_ENABLED = 39,
+    STYLE_ID_ENCODER_CURSOR_14_DISABLED = 40,
+    STYLE_ID_ENCODER_CURSOR_14_RIGHT_ENABLED = 41,
+    STYLE_ID_ENCODER_CURSOR_14_RIGHT_DISABLED = 42,
+    STYLE_ID_INFO_ALERT = 43,
+    STYLE_ID_MENU_WITH_BUTTONS_MESSAGE = 44,
+    STYLE_ID_MENU_WITH_BUTTONS_CONTAINER = 45,
+    STYLE_ID_MENU_WITH_BUTTONS_BUTTON = 46,
+    STYLE_ID_CHANNEL1 = 47,
+    STYLE_ID_DIB_DCP405_CHANNEL_OFF_BUTTON_20_NOT_PROHIBIT = 48,
+    STYLE_ID_DIB_DCP405_CHANNEL_OFF_BUTTON_20_PROHIBIT = 49,
+    STYLE_ID_DEFAULT_M = 50,
+    STYLE_ID_INLINE51 = 51,
     STYLE_ID_INLINE52 = 52,
     STYLE_ID_INLINE53 = 53,
-    STYLE_ID_INLINE54 = 54,
-    STYLE_ID_VALUE_S = 55,
-    STYLE_ID_TOUCH_CALIBRATION = 56,
-    STYLE_ID_NOTE_M = 57,
-    STYLE_ID_TOUCH_CALIBRATION_POINT = 58,
-    STYLE_ID_BUTTON_BGND = 59,
-    STYLE_ID_STATUS_ICON_ENABLED_WITH_NEED_ATTENTION = 60,
-    STYLE_ID_STATUS_ICON_ENABLED_AND_ERROR = 61,
-    STYLE_ID_STATUS_ICON_ENABLED_AND_ACTIVE = 62,
-    STYLE_ID_STATUS_ICON_ENABLED_BLINK = 63,
-    STYLE_ID_STATUS_ICON_DISABLED = 64,
-    STYLE_ID_DLOG_RECORD_BUTTON = 65,
-    STYLE_ID_STATUS_ICON_DISABLED_BLINK = 66,
-    STYLE_ID_INLINE67 = 67,
-    STYLE_ID_OVERLAY = 68,
-    STYLE_ID_OVERLAY_ICON = 69,
-    STYLE_ID_OVERLAY_LEFT = 70,
-    STYLE_ID_INLINE71 = 71,
-    STYLE_ID_INLINE72 = 72,
-    STYLE_ID_INLINE73 = 73,
+    STYLE_ID_PROGRESS = 54,
+    STYLE_ID_INLINE55 = 55,
+    STYLE_ID_INLINE56 = 56,
+    STYLE_ID_INLINE57 = 57,
+    STYLE_ID_VALUE_S = 58,
+    STYLE_ID_TOUCH_CALIBRATION = 59,
+    STYLE_ID_NOTE_M = 60,
+    STYLE_ID_TOUCH_CALIBRATION_POINT = 61,
+    STYLE_ID_BUTTON_BGND = 62,
+    STYLE_ID_STATUS_ICON_ENABLED_WITH_NEED_ATTENTION = 63,
+    STYLE_ID_STATUS_ICON_ENABLED_AND_ERROR = 64,
+    STYLE_ID_STATUS_ICON_ENABLED_AND_ACTIVE = 65,
+    STYLE_ID_STATUS_ICON_ENABLED_BLINK = 66,
+    STYLE_ID_STATUS_ICON_DISABLED = 67,
+    STYLE_ID_DLOG_RECORD_BUTTON = 68,
+    STYLE_ID_STATUS_ICON_DISABLED_BLINK = 69,
+    STYLE_ID_INLINE70 = 70,
+    STYLE_ID_OVERLAY = 71,
+    STYLE_ID_OVERLAY_ICON = 72,
+    STYLE_ID_OVERLAY_LEFT = 73,
     STYLE_ID_INLINE74 = 74,
-    STYLE_ID_VALUE_S_LEFT = 75,
-    STYLE_ID_EDIT_VALUE_M_LEFT = 76,
-    STYLE_ID_KEY_ICONS = 77,
-    STYLE_ID_KEY = 78,
-    STYLE_ID_KEY_DISABLED = 79,
-    STYLE_ID_INLINE80 = 80,
-    STYLE_ID_TAB_PAGE_SELECTED = 81,
-    STYLE_ID_TAB_PAGE = 82,
-    STYLE_ID_BOTTOM_BUTTON_BACKGROUND = 83,
-    STYLE_ID_BOTTOM_BUTTON = 84,
-    STYLE_ID_INLINE85 = 85,
-    STYLE_ID_INLINE86 = 86,
-    STYLE_ID_INLINE87 = 87,
+    STYLE_ID_INLINE75 = 75,
+    STYLE_ID_INLINE76 = 76,
+    STYLE_ID_INLINE77 = 77,
+    STYLE_ID_VALUE_S_LEFT = 78,
+    STYLE_ID_EDIT_VALUE_M_LEFT = 79,
+    STYLE_ID_KEY_ICONS = 80,
+    STYLE_ID_KEY = 81,
+    STYLE_ID_KEY_DISABLED = 82,
+    STYLE_ID_INLINE83 = 83,
+    STYLE_ID_TAB_PAGE_SELECTED = 84,
+    STYLE_ID_TAB_PAGE = 85,
+    STYLE_ID_BOTTOM_BUTTON_BACKGROUND = 86,
+    STYLE_ID_BOTTOM_BUTTON = 87,
     STYLE_ID_INLINE88 = 88,
     STYLE_ID_INLINE89 = 89,
     STYLE_ID_INLINE90 = 90,
-    STYLE_ID_BUTTON_S = 91,
-    STYLE_ID_EDIT_VALUE_S_LEFT = 92,
-    STYLE_ID_SLIDER_SHADE_1 = 93,
-    STYLE_ID_SLIDER_SHADE_2 = 94,
-    STYLE_ID_SLIDER_SHADE_3 = 95,
-    STYLE_ID_SLIDER_SHADE_4 = 96,
-    STYLE_ID_SLIDER_SHADE_5 = 97,
-    STYLE_ID_INLINE98 = 98,
-    STYLE_ID_INLINE99 = 99,
-    STYLE_ID_YES_NO = 100,
-    STYLE_ID_YES_NO_BUTTON = 101,
-    STYLE_ID_YES_NO_MESSAGE = 102,
-    STYLE_ID_INLINE103 = 103,
-    STYLE_ID_TEXT_MESSAGE = 104,
-    STYLE_ID_INLINE105 = 105,
+    STYLE_ID_INLINE91 = 91,
+    STYLE_ID_INLINE92 = 92,
+    STYLE_ID_INLINE93 = 93,
+    STYLE_ID_BUTTON_S = 94,
+    STYLE_ID_EDIT_VALUE_S_LEFT = 95,
+    STYLE_ID_SLIDER_SHADE_1 = 96,
+    STYLE_ID_SLIDER_SHADE_2 = 97,
+    STYLE_ID_SLIDER_SHADE_3 = 98,
+    STYLE_ID_SLIDER_SHADE_4 = 99,
+    STYLE_ID_SLIDER_SHADE_5 = 100,
+    STYLE_ID_INLINE101 = 101,
+    STYLE_ID_INLINE102 = 102,
+    STYLE_ID_YES_NO = 103,
+    STYLE_ID_YES_NO_BUTTON = 104,
+    STYLE_ID_YES_NO_MESSAGE = 105,
     STYLE_ID_INLINE106 = 106,
-    STYLE_ID_ASYNC_OPERATION = 107,
+    STYLE_ID_TEXT_MESSAGE = 107,
     STYLE_ID_INLINE108 = 108,
     STYLE_ID_INLINE109 = 109,
-    STYLE_ID_INLINE110 = 110,
+    STYLE_ID_ASYNC_OPERATION = 110,
     STYLE_ID_INLINE111 = 111,
     STYLE_ID_INLINE112 = 112,
     STYLE_ID_INLINE113 = 113,
     STYLE_ID_INLINE114 = 114,
     STYLE_ID_INLINE115 = 115,
-    STYLE_ID_DEFAULT_INVERSE = 116,
-    STYLE_ID_SCROLLBAR_THUMB = 117,
-    STYLE_ID_SCROLLBAR_BUTTON = 118,
-    STYLE_ID_BOTTOM_BUTTON_TEXTUAL_S_LEFT = 119,
-    STYLE_ID_INLINE120 = 120,
-    STYLE_ID_INLINE121 = 121,
-    STYLE_ID_KEY_SPEC_ICONS = 122,
+    STYLE_ID_INLINE116 = 116,
+    STYLE_ID_INLINE117 = 117,
+    STYLE_ID_INLINE118 = 118,
+    STYLE_ID_DEFAULT_INVERSE = 119,
+    STYLE_ID_SCROLLBAR_THUMB = 120,
+    STYLE_ID_SCROLLBAR_BUTTON = 121,
+    STYLE_ID_BOTTOM_BUTTON_TEXTUAL_S_LEFT = 122,
     STYLE_ID_INLINE123 = 123,
-    STYLE_ID_KEY_SPEC_ICONS_DISABLED = 124,
-    STYLE_ID_INLINE125 = 125,
+    STYLE_ID_INLINE124 = 124,
+    STYLE_ID_KEY_SPEC_ICONS = 125,
     STYLE_ID_INLINE126 = 126,
-    STYLE_ID_INLINE127 = 127,
+    STYLE_ID_KEY_SPEC_ICONS_DISABLED = 127,
     STYLE_ID_INLINE128 = 128,
-    STYLE_ID_EDIT_VALUE_S_CENTERED = 129,
+    STYLE_ID_INLINE129 = 129,
     STYLE_ID_INLINE130 = 130,
     STYLE_ID_INLINE131 = 131,
-    STYLE_ID_INLINE132 = 132,
+    STYLE_ID_EDIT_VALUE_S_CENTERED = 132,
     STYLE_ID_INLINE133 = 133,
     STYLE_ID_INLINE134 = 134,
     STYLE_ID_INLINE135 = 135,
@@ -2194,52 +1791,52 @@ enum StylesEnum {
     STYLE_ID_INLINE137 = 137,
     STYLE_ID_INLINE138 = 138,
     STYLE_ID_INLINE139 = 139,
-    STYLE_ID_VALUE_M_LEFT = 140,
+    STYLE_ID_INLINE140 = 140,
     STYLE_ID_INLINE141 = 141,
     STYLE_ID_INLINE142 = 142,
-    STYLE_ID_INLINE143 = 143,
-    STYLE_ID_MAX_CURRENT_LIMIT_CAUSE = 144,
+    STYLE_ID_VALUE_M_LEFT = 143,
+    STYLE_ID_INLINE144 = 144,
     STYLE_ID_INLINE145 = 145,
-    STYLE_ID_DEFAULT_DISABLED_M_LEFT = 146,
-    STYLE_ID_ENCODER_CURSOR_17_ENABLED = 147,
+    STYLE_ID_INLINE146 = 146,
+    STYLE_ID_MAX_CURRENT_LIMIT_CAUSE = 147,
     STYLE_ID_INLINE148 = 148,
-    STYLE_ID_YT_GRAPH = 149,
-    STYLE_ID_LIST_GRAPH_CURSOR = 150,
-    STYLE_ID_YT_GRAPH_U_DEFAULT_LABEL = 151,
-    STYLE_ID_YT_GRAPH_I_DEFAULT_LABEL = 152,
-    STYLE_ID_ENCODER_CURSOR_14_ENABLED = 153,
-    STYLE_ID_INLINE154 = 154,
-    STYLE_ID_INLINE155 = 155,
+    STYLE_ID_DEFAULT_DISABLED_M_LEFT = 149,
+    STYLE_ID_ENCODER_CURSOR_17_ENABLED = 150,
+    STYLE_ID_INLINE151 = 151,
+    STYLE_ID_YT_GRAPH = 152,
+    STYLE_ID_LIST_GRAPH_CURSOR = 153,
+    STYLE_ID_YT_GRAPH_U_DEFAULT_LABEL = 154,
+    STYLE_ID_YT_GRAPH_I_DEFAULT_LABEL = 155,
     STYLE_ID_INLINE156 = 156,
-    STYLE_ID_EDIT_VALUE_M_CENTERED = 157,
+    STYLE_ID_INLINE157 = 157,
     STYLE_ID_INLINE158 = 158,
-    STYLE_ID_INLINE159 = 159,
+    STYLE_ID_EDIT_VALUE_M_CENTERED = 159,
     STYLE_ID_INLINE160 = 160,
     STYLE_ID_INLINE161 = 161,
-    STYLE_ID_BUTTON_S_DISABLED = 162,
+    STYLE_ID_INLINE162 = 162,
     STYLE_ID_INLINE163 = 163,
-    STYLE_ID_INLINE164 = 164,
+    STYLE_ID_BUTTON_S_DISABLED = 164,
     STYLE_ID_INLINE165 = 165,
-    STYLE_ID_OPTION_TOGGLE_L_CENTER = 166,
+    STYLE_ID_INLINE166 = 166,
     STYLE_ID_INLINE167 = 167,
-    STYLE_ID_EVENT_ERROR = 168,
-    STYLE_ID_DEFAULT_DISABLED_S_LEFT = 169,
-    STYLE_ID_INLINE170 = 170,
-    STYLE_ID_INLINE171 = 171,
-    STYLE_ID_ICON_AND_TEXT_S = 172,
+    STYLE_ID_OPTION_TOGGLE_L_CENTER = 168,
+    STYLE_ID_INLINE169 = 169,
+    STYLE_ID_EVENT_ERROR = 170,
+    STYLE_ID_DEFAULT_DISABLED_S_LEFT = 171,
+    STYLE_ID_INLINE172 = 172,
     STYLE_ID_INLINE173 = 173,
-    STYLE_ID_INLINE174 = 174,
+    STYLE_ID_ICON_AND_TEXT_S = 174,
     STYLE_ID_INLINE175 = 175,
-    STYLE_ID_VALUE_M = 176,
+    STYLE_ID_INLINE176 = 176,
     STYLE_ID_INLINE177 = 177,
-    STYLE_ID_INLINE178 = 178,
+    STYLE_ID_VALUE_M = 178,
     STYLE_ID_INLINE179 = 179,
-    STYLE_ID_DEFAULT_DISABLED = 180,
+    STYLE_ID_INLINE180 = 180,
     STYLE_ID_INLINE181 = 181,
-    STYLE_ID_INLINE182 = 182,
-    STYLE_ID_EDIT_S = 183,
+    STYLE_ID_DEFAULT_DISABLED = 182,
+    STYLE_ID_INLINE183 = 183,
     STYLE_ID_INLINE184 = 184,
-    STYLE_ID_INLINE185 = 185,
+    STYLE_ID_EDIT_S = 185,
     STYLE_ID_INLINE186 = 186,
     STYLE_ID_INLINE187 = 187,
     STYLE_ID_INLINE188 = 188,
@@ -2281,19 +1878,19 @@ enum StylesEnum {
     STYLE_ID_INLINE224 = 224,
     STYLE_ID_INLINE225 = 225,
     STYLE_ID_INLINE226 = 226,
-    STYLE_ID_EVENT_WARNING = 227,
+    STYLE_ID_INLINE227 = 227,
     STYLE_ID_INLINE228 = 228,
-    STYLE_ID_INLINE229 = 229,
+    STYLE_ID_EVENT_WARNING = 229,
     STYLE_ID_INLINE230 = 230,
     STYLE_ID_INLINE231 = 231,
     STYLE_ID_INLINE232 = 232,
     STYLE_ID_INLINE233 = 233,
     STYLE_ID_INLINE234 = 234,
     STYLE_ID_INLINE235 = 235,
-    STYLE_ID_DISPLAY_OFF = 236,
-    STYLE_ID_DISPLAY_OFF_S = 237,
-    STYLE_ID_INLINE238 = 238,
-    STYLE_ID_INLINE239 = 239,
+    STYLE_ID_INLINE236 = 236,
+    STYLE_ID_INLINE237 = 237,
+    STYLE_ID_DISPLAY_OFF = 238,
+    STYLE_ID_DISPLAY_OFF_S = 239,
     STYLE_ID_INLINE240 = 240,
     STYLE_ID_INLINE241 = 241,
     STYLE_ID_INLINE242 = 242,
@@ -2303,11 +1900,11 @@ enum StylesEnum {
     STYLE_ID_INLINE246 = 246,
     STYLE_ID_INLINE247 = 247,
     STYLE_ID_INLINE248 = 248,
-    STYLE_ID_STATUS_LINE_SMALL_TITLE = 249,
-    STYLE_ID_EDIT_VALUE_S_CENTERED_STATUS_LINE = 250,
-    STYLE_ID_SCROLLBAR_TRACK = 251,
-    STYLE_ID_INLINE252 = 252,
-    STYLE_ID_INLINE253 = 253,
+    STYLE_ID_INLINE249 = 249,
+    STYLE_ID_INLINE250 = 250,
+    STYLE_ID_STATUS_LINE_SMALL_TITLE = 251,
+    STYLE_ID_EDIT_VALUE_S_CENTERED_STATUS_LINE = 252,
+    STYLE_ID_SCROLLBAR_TRACK = 253,
     STYLE_ID_INLINE254 = 254,
     STYLE_ID_INLINE255 = 255,
     STYLE_ID_INLINE256 = 256,
@@ -2341,9 +1938,9 @@ enum StylesEnum {
     STYLE_ID_INLINE284 = 284,
     STYLE_ID_INLINE285 = 285,
     STYLE_ID_INLINE286 = 286,
-    STYLE_ID_DEFAULT_M_WARNING = 287,
+    STYLE_ID_INLINE287 = 287,
     STYLE_ID_INLINE288 = 288,
-    STYLE_ID_INLINE289 = 289,
+    STYLE_ID_DEFAULT_M_WARNING = 289,
     STYLE_ID_INLINE290 = 290,
     STYLE_ID_INLINE291 = 291,
     STYLE_ID_INLINE292 = 292,
@@ -2367,11 +1964,11 @@ enum StylesEnum {
     STYLE_ID_INLINE310 = 310,
     STYLE_ID_INLINE311 = 311,
     STYLE_ID_INLINE312 = 312,
-    STYLE_ID_LABELS_AND_COLORS_SLOT = 313,
+    STYLE_ID_INLINE313 = 313,
     STYLE_ID_INLINE314 = 314,
-    STYLE_ID_INLINE315 = 315,
+    STYLE_ID_LABELS_AND_COLORS_SLOT = 315,
     STYLE_ID_INLINE316 = 316,
-    STYLE_ID_FRONT_PANEL_MODULE = 317,
+    STYLE_ID_INLINE317 = 317,
     STYLE_ID_INLINE318 = 318,
     STYLE_ID_INLINE319 = 319,
     STYLE_ID_INLINE320 = 320,
@@ -2383,142 +1980,41 @@ enum StylesEnum {
     STYLE_ID_INLINE326 = 326,
     STYLE_ID_INLINE327 = 327,
     STYLE_ID_INLINE328 = 328,
-    STYLE_ID_TRIGGER_BUTTON_14 = 329,
+    STYLE_ID_INLINE329 = 329,
     STYLE_ID_INLINE330 = 330,
-    STYLE_ID_INLINE331 = 331,
+    STYLE_ID_FRONT_PANEL_MODULE = 331,
     STYLE_ID_INLINE332 = 332,
     STYLE_ID_INLINE333 = 333,
     STYLE_ID_INLINE334 = 334,
     STYLE_ID_INLINE335 = 335,
-    STYLE_ID_INLINE336 = 336,
+    STYLE_ID_MON_VALUE_48_RIGHT = 336,
     STYLE_ID_INLINE337 = 337,
-    STYLE_ID_INLINE338 = 338,
-    STYLE_ID_INLINE339 = 339,
-    STYLE_ID_INLINE340 = 340,
-    STYLE_ID_INLINE341 = 341,
-    STYLE_ID_INLINE342 = 342,
-    STYLE_ID_INLINE343 = 343,
-    STYLE_ID_INLINE344 = 344,
-    STYLE_ID_INLINE345 = 345,
+    STYLE_ID_MON_VALUE_20_LEFT = 338,
+    STYLE_ID_BAR_GRAPH_U_DEFAULT = 339,
+    STYLE_ID_BAR_GRAPH_TEXT = 340,
+    STYLE_ID_BAR_GRAPH_SET_LINE = 341,
+    STYLE_ID_BAR_GRAPH_LIMIT_LINE = 342,
+    STYLE_ID_BAR_GRAPH_I_DEFAULT = 343,
+    STYLE_ID_LABELS_AND_COLORS_CHANNEL = 344,
+    STYLE_ID_CHANNEL_OFF_BUTTON_20 = 345,
     STYLE_ID_INLINE346 = 346,
     STYLE_ID_INLINE347 = 347,
     STYLE_ID_INLINE348 = 348,
-    STYLE_ID_INLINE349 = 349,
+    STYLE_ID_TRIGGER_BUTTON_24 = 349,
     STYLE_ID_INLINE350 = 350,
     STYLE_ID_INLINE351 = 351,
     STYLE_ID_INLINE352 = 352,
-    STYLE_ID_INLINE353 = 353,
+    STYLE_ID_TRIGGER_BUTTON_14 = 353,
     STYLE_ID_INLINE354 = 354,
     STYLE_ID_INLINE355 = 355,
     STYLE_ID_INLINE356 = 356,
-    STYLE_ID_INLINE357 = 357,
-    STYLE_ID_INLINE358 = 358,
-    STYLE_ID_INLINE359 = 359,
+    STYLE_ID_CH_PROT_OFF = 357,
+    STYLE_ID_CH_PROT_ON = 358,
+    STYLE_ID_CH_PROT_TRIPPED = 359,
     STYLE_ID_INLINE360 = 360,
     STYLE_ID_INLINE361 = 361,
     STYLE_ID_INLINE362 = 362,
-    STYLE_ID_INLINE363 = 363,
-    STYLE_ID_INLINE364 = 364,
-    STYLE_ID_INLINE365 = 365,
-    STYLE_ID_INLINE366 = 366,
-    STYLE_ID_INLINE367 = 367,
-    STYLE_ID_INLINE368 = 368,
-    STYLE_ID_INLINE369 = 369,
-    STYLE_ID_INLINE370 = 370,
-    STYLE_ID_INLINE371 = 371,
-    STYLE_ID_INLINE372 = 372,
-    STYLE_ID_INLINE373 = 373,
-    STYLE_ID_INLINE374 = 374,
-    STYLE_ID_INLINE375 = 375,
-    STYLE_ID_INLINE376 = 376,
-    STYLE_ID_INLINE377 = 377,
-    STYLE_ID_INLINE378 = 378,
-    STYLE_ID_INLINE379 = 379,
-    STYLE_ID_INLINE380 = 380,
-    STYLE_ID_INLINE381 = 381,
-    STYLE_ID_INLINE382 = 382,
-    STYLE_ID_INLINE383 = 383,
-    STYLE_ID_INLINE384 = 384,
-    STYLE_ID_INLINE385 = 385,
-    STYLE_ID_INLINE386 = 386,
-    STYLE_ID_INLINE387 = 387,
-    STYLE_ID_INLINE388 = 388,
-    STYLE_ID_INLINE389 = 389,
-    STYLE_ID_INLINE390 = 390,
-    STYLE_ID_INLINE391 = 391,
-    STYLE_ID_INLINE392 = 392,
-    STYLE_ID_INLINE393 = 393,
-    STYLE_ID_INLINE394 = 394,
-    STYLE_ID_INLINE395 = 395,
-    STYLE_ID_INLINE396 = 396,
-    STYLE_ID_INLINE397 = 397,
-    STYLE_ID_INLINE398 = 398,
-    STYLE_ID_INLINE399 = 399,
-    STYLE_ID_INLINE400 = 400,
-    STYLE_ID_INLINE401 = 401,
-    STYLE_ID_INLINE402 = 402,
-    STYLE_ID_INLINE403 = 403,
-    STYLE_ID_INLINE404 = 404,
-    STYLE_ID_INLINE405 = 405,
-    STYLE_ID_INLINE406 = 406,
-    STYLE_ID_INLINE407 = 407,
-    STYLE_ID_INLINE408 = 408,
-    STYLE_ID_INLINE409 = 409,
-    STYLE_ID_INLINE410 = 410,
-    STYLE_ID_INLINE411 = 411,
-    STYLE_ID_INLINE412 = 412,
-    STYLE_ID_INLINE413 = 413,
-    STYLE_ID_INLINE414 = 414,
-    STYLE_ID_MON_VALUE_48_RIGHT = 415,
-    STYLE_ID_INLINE416 = 416,
-    STYLE_ID_MON_VALUE_20_LEFT = 417,
-    STYLE_ID_BAR_GRAPH_U_DEFAULT = 418,
-    STYLE_ID_BAR_GRAPH_TEXT = 419,
-    STYLE_ID_BAR_GRAPH_SET_LINE = 420,
-    STYLE_ID_BAR_GRAPH_LIMIT_LINE = 421,
-    STYLE_ID_BAR_GRAPH_I_DEFAULT = 422,
-    STYLE_ID_LABELS_AND_COLORS_CHANNEL = 423,
-    STYLE_ID_CHANNEL_OFF_BUTTON_20 = 424,
-    STYLE_ID_INLINE425 = 425,
-    STYLE_ID_INLINE426 = 426,
-    STYLE_ID_INLINE427 = 427,
-    STYLE_ID_DIB_DCP405_CHANNEL_OFF_BUTTON_20_NOT_PROHIBIT = 428,
-    STYLE_ID_INLINE429 = 429,
-    STYLE_ID_TRIGGER_BUTTON_24 = 430,
-    STYLE_ID_INLINE431 = 431,
-    STYLE_ID_INLINE432 = 432,
-    STYLE_ID_INLINE433 = 433,
-    STYLE_ID_INLINE434 = 434,
-    STYLE_ID_INLINE435 = 435,
-    STYLE_ID_INLINE436 = 436,
-    STYLE_ID_CH_PROT_OFF = 437,
-    STYLE_ID_CH_PROT_ON = 438,
-    STYLE_ID_CH_PROT_TRIPPED = 439,
-    STYLE_ID_INLINE440 = 440,
-    STYLE_ID_INLINE441 = 441,
-    STYLE_ID_INLINE442 = 442,
-    STYLE_ID_MON_VALUE_38_RIGHT = 443,
-    STYLE_ID_MON_VALUE_14_RIGHT = 444,
-    STYLE_ID_ENCODER_CURSOR_14_RIGHT_ENABLED = 445,
-    STYLE_ID_CHANNEL_OFF_BUTTON_38 = 446,
-    STYLE_ID_INLINE447 = 447,
-    STYLE_ID_INLINE448 = 448,
-    STYLE_ID_INLINE449 = 449,
-    STYLE_ID_INLINE450 = 450,
-    STYLE_ID_INLINE451 = 451,
-    STYLE_ID_INLINE452 = 452,
-    STYLE_ID_INLINE453 = 453,
-    STYLE_ID_INLINE454 = 454,
-    STYLE_ID_INLINE455 = 455,
-    STYLE_ID_INLINE456 = 456,
-    STYLE_ID_DIB_MUX14D_IMAGE = 457,
-    STYLE_ID_INLINE458 = 458,
-    STYLE_ID_INLINE459 = 459,
-    STYLE_ID_INLINE460 = 460,
-    STYLE_ID_INLINE461 = 461,
-    STYLE_ID_INLINE462 = 462,
-    STYLE_ID_INLINE463 = 463,
-    STYLE_ID_INLINE464 = 464
+    STYLE_ID_MON_VALUE_38_RIGHT = 363
 };
 
 enum ThemesEnum {
@@ -2751,131 +2247,58 @@ enum PagesEnum {
     PAGE_ID_OVP_TYPE = 116,
     PAGE_ID_SLOT_LABELS_AND_COLORS = 117,
     PAGE_ID_COLOR_PICKER = 118,
-    PAGE_ID_DIB_MIO168_SIMULATOR_FRONT_PANEL_MASK = 119,
-    PAGE_ID_DIB_MIO168_SLOT_VIEW_DEF_VERT = 120,
-    PAGE_ID_DIB_MIO168_SLOT_VIEW_DEF_HORZ = 121,
-    PAGE_ID_DIB_MIO168_SLOT_VIEW_DEF_2COL_VERT = 122,
-    PAGE_ID_DIB_MIO168_SLOT_VIEW_DEF_2COL_HORZ = 123,
-    PAGE_ID_DIB_MIO168_SLOT_VIEW_MAX = 124,
-    PAGE_ID_DIB_MIO168_LABELS_AND_COLORS = 125,
-    PAGE_ID_DIB_MIO168_CHANNEL_LABELS = 126,
-    PAGE_ID_DIB_MIO168_DIN_CHANNEL_LABELS = 127,
-    PAGE_ID_DIB_MIO168_DOUT_CHANNEL_LABELS = 128,
-    PAGE_ID_DIB_MIO168_SETTINGS = 129,
-    PAGE_ID_DIB_MIO168_DIN_CONFIGURATION = 130,
-    PAGE_ID_DIB_MIO168_DOUT_CONFIGURATION = 131,
-    PAGE_ID_DIB_MIO168_AIN_CONFIGURATION = 132,
-    PAGE_ID_DIB_MIO168_AOUT_DAC7760_CONFIGURATION = 133,
-    PAGE_ID_DIB_MIO168_AOUT_DAC7563_CONFIGURATION = 134,
-    PAGE_ID_DIB_MIO168_INFO = 135,
-    PAGE_ID_DIB_PREL6_SIMULATOR_FRONT_PANEL_MASK = 136,
-    PAGE_ID_DIB_PREL6_SLOT_VIEW_DEF_VERT = 137,
-    PAGE_ID_DIB_PREL6_SLOT_VIEW_DEF_HORZ = 138,
-    PAGE_ID_DIB_PREL6_SLOT_VIEW_DEF_2COL_VERT = 139,
-    PAGE_ID_DIB_PREL6_SLOT_VIEW_DEF_2COL_HORZ = 140,
-    PAGE_ID_DIB_PREL6_SLOT_VIEW_MAX = 141,
-    PAGE_ID_DIB_PREL6_SETTINGS = 142,
-    PAGE_ID_DIB_PREL6_LABELS_AND_COLORS = 143,
-    PAGE_ID_DIB_PREL6_CHANNEL_LABELS = 144,
-    PAGE_ID_DIB_PREL6_INFO = 145,
-    PAGE_ID_DIB_SMX46_SIMULATOR_FRONT_PANEL_MASK = 146,
-    PAGE_ID_DIB_SMX46_SLOT_VIEW_DEF_VERT = 147,
-    PAGE_ID_DIB_SMX46_SLOT_VIEW_DEF_HORZ = 148,
-    PAGE_ID_DIB_SMX46_SLOT_VIEW_DEF_2COL_VERT = 149,
-    PAGE_ID_DIB_SMX46_SLOT_VIEW_DEF_2COL_HORZ = 150,
-    PAGE_ID_DIB_SMX46_SLOT_VIEW_MAX = 151,
-    PAGE_ID_DIB_SMX46_SETTINGS = 152,
-    PAGE_ID_DIB_SMX46_AOUT_CONFIGURATION = 153,
-    PAGE_ID_DIB_SMX46_CONFIGURE_ROUTES = 154,
-    PAGE_ID_DIB_SMX46_INFO = 155,
-    PAGE_ID_DIB_SMX46_RELAY_CYCLES = 156,
-    PAGE_ID_DIB_SMX46_LABELS_AND_COLORS = 157,
-    PAGE_ID_DIB_DCP405_SIMULATOR_FRONT_PANEL_MASK = 158,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_NUM_ON = 159,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_NUM_ON_2COL = 160,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VBAR_ON = 161,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VBAR_ON_2COL = 162,
-    PAGE_ID_DIB_DCP405_LABELS_AND_COLORS = 163,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_OFF = 164,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_OFF_2COL = 165,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_SERIES = 166,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_SERIES_2COL = 167,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_PARALLEL = 168,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_PARALLEL_2COL = 169,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HBAR_ON = 170,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HBAR_ON_2COL = 171,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_YT_ON = 172,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_YT_ON_2COL = 173,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_OFF = 174,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_OFF_2COL = 175,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_SERIES = 176,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_SERIES_2COL = 177,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_PARALLEL = 178,
-    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_PARALLEL_2COL = 179,
-    PAGE_ID_DIB_DCP405_SLOT_MAX = 180,
-    PAGE_ID_DIB_DCP405_VOLTAGE_MONITOR = 181,
-    PAGE_ID_DIB_DCP405_CURRENT_MONITOR = 182,
-    PAGE_ID_DIB_DCM220_SIMULATOR_FRONT_PANEL_MASK = 183,
-    PAGE_ID_DIB_DCM220_FRONT_PANEL_LED = 184,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT = 185,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_WITH_BORDER = 186,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_ON = 187,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_OFF = 188,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_2COL = 189,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_WITH_BORDER_2COL = 190,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_ON_2COL = 191,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_VERT_OFF_2COL = 192,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ = 193,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_WITH_BORDER = 194,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_ON = 195,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_OFF = 196,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_2COL = 197,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_WITH_BORDER_2COL = 198,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_ON_2COL = 199,
-    PAGE_ID_DIB_DCM220_SLOT_DEF_2CH_HORZ_OFF_2COL = 200,
-    PAGE_ID_DIB_DCM220_SLOT_MAX = 201,
-    PAGE_ID_DIB_DCM220_VOLTAGE_MONITOR = 202,
-    PAGE_ID_DIB_DCM220_CURRENT_MONITOR = 203,
-    PAGE_ID_DIB_DCM220_LABELS_AND_COLORS = 204,
-    PAGE_ID_DIB_DCM220_LABELS_AND_COLORS_CH = 205,
-    PAGE_ID_FRONT_PANEL = 206,
-    PAGE_ID_FRONT_PANEL_EMPTY_SLOT = 207,
-    PAGE_ID_FRONT_PANEL_NUMERIC_KEYPAD = 208,
-    PAGE_ID_DIB_DCM224_SIMULATOR_FRONT_PANEL_MASK = 209,
-    PAGE_ID_DIB_DCM224_FRONT_PANEL_LED = 210,
-    PAGE_ID_DIB_DCM224_CH_SETTINGS_ADV_OPTIONS = 211,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT = 212,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_WITH_BORDER = 213,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_ON = 214,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_OFF = 215,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_2COL = 216,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_WITH_BORDER_2COL = 217,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_ON_2COL = 218,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_VERT_OFF_2COL = 219,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ = 220,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_WITH_BORDER = 221,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_ON = 222,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_OFF = 223,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_2COL = 224,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_WITH_BORDER_2COL = 225,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_ON_2COL = 226,
-    PAGE_ID_DIB_DCM224_SLOT_DEF_2CH_HORZ_OFF_2COL = 227,
-    PAGE_ID_DIB_DCM224_SLOT_MAX = 228,
-    PAGE_ID_DIB_DCM224_VOLTAGE_MONITOR = 229,
-    PAGE_ID_DIB_DCM224_CURRENT_MONITOR = 230,
-    PAGE_ID_DIB_DCM224_LABELS_AND_COLORS = 231,
-    PAGE_ID_DIB_DCM224_LABELS_AND_COLORS_CH = 232,
-    PAGE_ID_DIB_MUX14D_SIMULATOR_FRONT_PANEL_MASK = 233,
-    PAGE_ID_DIB_MUX14D_SLOT_VIEW_DEF_VERT = 234,
-    PAGE_ID_DIB_MUX14D_SLOT_VIEW_DEF_HORZ = 235,
-    PAGE_ID_DIB_MUX14D_SLOT_VIEW_DEF_2COL_VERT = 236,
-    PAGE_ID_DIB_MUX14D_SLOT_VIEW_DEF_2COL_HORZ = 237,
-    PAGE_ID_DIB_MUX14D_SLOT_VIEW_MAX = 238,
-    PAGE_ID_DIB_MUX14D_SETTINGS = 239,
-    PAGE_ID_DIB_MUX14D_LABELS_AND_COLORS = 240,
-    PAGE_ID_DIB_MUX14D_CHANNEL_LABELS = 241,
-    PAGE_ID_DIB_MUX14D_INFO = 242,
-    PAGE_ID_DIB_MUX14D_RELAY_CYCLES = 243
+    PAGE_ID_FRONT_PANEL = 119,
+    PAGE_ID_FRONT_PANEL_EMPTY_SLOT = 120,
+    PAGE_ID_FRONT_PANEL_NUMERIC_KEYPAD = 121,
+    PAGE_ID_DIB_DCP405_SIMULATOR_FRONT_PANEL_MASK = 122,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_NUM_ON = 123,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_NUM_ON_2COL = 124,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VBAR_ON = 125,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VBAR_ON_2COL = 126,
+    PAGE_ID_DIB_DCP405_LABELS_AND_COLORS = 127,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_OFF = 128,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_OFF_2COL = 129,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_SERIES = 130,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_SERIES_2COL = 131,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_PARALLEL = 132,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_VERT_COUPLED_PARALLEL_2COL = 133,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HBAR_ON = 134,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HBAR_ON_2COL = 135,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_YT_ON = 136,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_YT_ON_2COL = 137,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_OFF = 138,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_OFF_2COL = 139,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_SERIES = 140,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_SERIES_2COL = 141,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_PARALLEL = 142,
+    PAGE_ID_DIB_DCP405_SLOT_DEF_1CH_HORZ_COUPLED_PARALLEL_2COL = 143,
+    PAGE_ID_DIB_DCP405_SLOT_MAX = 144,
+    PAGE_ID_DIB_DCP405_VOLTAGE_MONITOR = 145,
+    PAGE_ID_DIB_DCP405_CURRENT_MONITOR = 146,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VERT_COUPLED_SERIES = 147,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VERT_COUPLED_SERIES_2COL = 148,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VERT_COUPLED_PARALLEL = 149,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VERT_COUPLED_PARALLEL_2COL = 150,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HORZ_COUPLED_SERIES = 151,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HORZ_COUPLED_SERIES_2COL = 152,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HORZ_COUPLED_PARALLEL = 153,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HORZ_COUPLED_PARALLEL_2COL = 154,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VBAR_ON = 155,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VBAR_ON_2COL = 156,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_NUM_ON_2COL = 157,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_NUM_ON = 158,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VERT_OFF = 159,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_VERT_OFF_2COL = 160,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HBAR_ON = 161,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HBAR_ON_2COL = 162,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_YT_ON_2COL = 163,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HORZ_OFF = 164,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_YT_ON = 165,
+    PAGE_ID_DIB_DCM242_SLOT_DEF_1CH_HORZ_OFF_2COL = 166,
+    PAGE_ID_DIB_DCM242_VOLTAGE_MONITOR = 167,
+    PAGE_ID_DIB_DCM242_CURRENT_MONITOR = 168,
+    PAGE_ID_DIB_DCM242_LABELS_AND_COLORS = 169,
+    PAGE_ID_DIB_DCM242_SLOT_MAX = 170
 };
 
-extern const uint8_t assets[627737];
+extern const uint8_t assets[441472];

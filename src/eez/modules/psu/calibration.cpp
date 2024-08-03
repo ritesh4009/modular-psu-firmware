@@ -161,13 +161,14 @@ bool Value::checkValueAndAdc(float value, float adc) {
             return false;
         }
 
-        if (g_slots[channel->slotIndex]->moduleType != MODULE_TYPE_DCM220 && g_slots[channel->slotIndex]->moduleType != MODULE_TYPE_DCM224) {
+        //if (g_slots[channel->slotIndex]->moduleType != MODULE_TYPE_DCM220 && g_slots[channel->slotIndex]->moduleType != MODULE_TYPE_DCM224) {
+        /*if (g_slots[channel->slotIndex]->moduleType != MODULE_TYPE_DCM220) {
             diff = fabsf(dac - adc);
             if (diff > allowedDiff) {
                 DebugTrace("ADC check failed: level=%f, adc=%f, diff=%f, allowedDiff=%f\n", dac, adc, diff, allowedDiff);
                 return false;
             }
-        }
+        }*/
     }
 
     return true;
