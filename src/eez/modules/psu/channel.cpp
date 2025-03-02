@@ -1432,7 +1432,6 @@ bool Channel::isCurrentLimitExceeded(float i) {
         channel_dispatcher::roundChannelValue(*this, UNIT_AMPER, channel_dispatcher::getILimit(*this));
 }
 
-
 TriggerMode Channel::getVoltageTriggerMode() {
     return (TriggerMode)flags.voltageTriggerMode;
 }

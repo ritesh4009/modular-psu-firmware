@@ -44,6 +44,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -81,6 +82,16 @@ extern void debug_trace(const char *str, size_t len);
 int __io_putstr(char *ptr, int len) {
 	debug_trace(ptr, (size_t)len);
 	return 0;
+}
+
+int _write(int file, char *ptr, int len)
+{
+  int i = 0;
+  for (i = 0; i < len; i++)
+  {
+    ITM_SendChar((*ptr++));
+  }
+  return len;
 }
 /* USER CODE END 0 */
 

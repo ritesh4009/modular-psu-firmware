@@ -23,7 +23,7 @@
 static const uint16_t MODULE_REVISION_DCM242_R1B1  = 0x0242;
 
 namespace eez {
-namespace dcm242 {
+namespace dcp242 {
 
 extern Module *g_module;
 

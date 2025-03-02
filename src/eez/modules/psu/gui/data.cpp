@@ -272,7 +272,7 @@ EnumItem g_enumDefinition_MODULE_TYPE[] = {
     //{ MODULE_TYPE_DIB_PREL6, "PREL6" },
     //{ MODULE_TYPE_DIB_SMX46, "SMX46" },
     //{ MODULE_TYPE_DIB_MUX14D, "MUX14D" },
-	{ MODULE_TYPE_DCM242, "DCM242" },
+	{ MODULE_TYPE_DCP242, "DCP242" },
     { 0, 0 }
 };
 

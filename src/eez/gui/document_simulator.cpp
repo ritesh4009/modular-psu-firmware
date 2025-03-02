@@ -512,7 +512,7 @@ DataOperationsFunction g_dataOperationsFunctions[] = {
     data_front_panel_slot2_view,
     data_front_panel_slot3_view,
     data_dib_dcp405_channel_off_status,
-    data_dib_dcm242_slot_def_2ch_view
+    data_dib_dcp242_slot_def_2ch_view
 };
 
 ActionExecFunc g_actionExecFunctions[] = {

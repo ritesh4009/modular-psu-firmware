@@ -34,7 +34,7 @@
 //#include <eez/modules/dib-prel6/dib-prel6.h>
 //#include <eez/modules/dib-smx46/dib-smx46.h>
 //#include <eez/modules/dib-mux14d/dib-mux14d.h>
-#include <eez/modules/dib-dcm242/dib-dcm242.h>
+#include <eez/modules/dib-dcp242/dib-dcp242.h>
 
 #include <eez/gui/gui.h>
 #include <eez/modules/psu/psu.h>
@@ -984,7 +984,7 @@ static Module *g_modules[] = {
     //dib_prel6::g_module,
     //dib_smx46::g_module,
     //dib_mux14d::g_module,
-	dcm242::g_module
+	dcp242::g_module
 };
 
 

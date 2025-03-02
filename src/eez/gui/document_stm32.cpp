@@ -504,7 +504,7 @@ DataOperationsFunction g_dataOperationsFunctions[] = {
     data_sys_settings_scripting_auto_start_script_enabled,
     data_sys_prohibit_output_enable_if_external_voltage_detected,
     data_dib_dcp405_channel_off_status,
-    data_dib_dcm242_slot_def_2ch_view
+    data_dib_dcp242_slot_def_2ch_view
 };
 
 ActionExecFunc g_actionExecFunctions[] = {
