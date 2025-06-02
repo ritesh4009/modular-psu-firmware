@@ -1,0 +1,31 @@
+{
+    "files.associations": {
+        "platform.h": "c",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "xtr1common": "cpp",
+        "xiosbase": "cpp",
+        "algorithm": "cpp",
+        "system_error": "cpp",
+        "iosfwd": "cpp",
+        "xlocale": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp",
+        "*.rh": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "xmemory0": "cpp",
+        "initializer_list": "cpp",
+        "queue": "cpp",
+        "xlocnum": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "streambuf": "cpp",
+        "limits": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled",
+    "cmake.configureOnOpen": true
+}
