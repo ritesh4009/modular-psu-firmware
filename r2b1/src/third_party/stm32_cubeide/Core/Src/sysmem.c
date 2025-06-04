@@ -23,6 +23,8 @@
 
 /* Includes */
 #include <stdio.h>
+#include <sys/types.h>
+
 
 /* Variables */
 extern int errno;
