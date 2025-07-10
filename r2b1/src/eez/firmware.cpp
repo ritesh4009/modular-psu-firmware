@@ -132,6 +132,7 @@ void boot() {
 
     mcu::eeprom::init();
     mcu::eeprom::test();
+    //mcu::eeprom::resetAllExceptOnTimeCounters(); //to reset eeprom
 
     bp3c::eeprom::init();
     bp3c::eeprom::test();

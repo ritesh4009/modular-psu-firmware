@@ -76,23 +76,24 @@ namespace dcp242 {
 static const uint16_t MODULE_REVISION_DCP242_R1B1  = 0x0242;
 
 static const uint16_t DAC_MIN = 0;
-static const uint16_t DAC_MAX = 4095;
+static const uint16_t DAC_MAX = 65535;
 
 static const uint16_t ADC_MIN = 0;
-static const uint16_t ADC_MAX = 65535;
+static const uint16_t ADC_MAX = 32767;
 
 
 
 #define BUFFER_SIZE 14
+//#define BUFFER_SIZE 18
 
 static const float PTOT = 40.0f;
 static const float I_MON_RESOLUTION = 0.02f;
 
-#define REG0_OE_MASK      (1 << 0)
-#define REG0_CC_MASK      (1 << 1)
-#define REG0_PWRGOOD_MASK (1 << 2)
-#define REG0_DP_MASK	  (1 << 3)
-#define REG0_R_SENSE_MASK	  (1 << 4)
+#define REG0_OE_MASK      		(1 << 0)
+#define REG0_CC_MASK      		(1 << 1)
+#define REG0_PWRGOOD_MASK 		(1 << 2)
+#define REG0_DP_MASK	  		(1 << 3)
+#define REG0_R_SENSE_MASK	  	(1 << 4)
 
 uint32_t lastAdcStartTickCounter = 0;
 uint8_t reg0_old = 0;
@@ -126,6 +127,8 @@ struct DcpChannel : public Channel {
 
 	    uint16_t uMonAdc = 0;
 	    uint16_t iMonAdc = 0;
+	    //uint32_t uMonAdc = 0;
+	    //uint32_t iMonAdc = 0;
 
 	    float temperature = 25.0f;
 
@@ -147,7 +150,7 @@ struct DcpChannel : public Channel {
 
 			params.U_MIN = 1.0f;
 			params.U_DEF = 5.0f;
-			params.U_MAX = 20.0f;
+			params.U_MAX = 25.0f;
 
 			params.U_MIN_STEP = 0.01f;
 			params.U_DEF_STEP = 0.1f;
@@ -161,7 +164,7 @@ struct DcpChannel : public Channel {
 
 			params.I_MIN = 0.01f;
 			params.I_DEF = 0.01f;
-			params.I_MAX = 2.0f;
+			params.I_MAX = 2.5f;
 
 	    	params.I_MON_MIN = 0.01f;
 
@@ -195,9 +198,9 @@ struct DcpChannel : public Channel {
 
 			params.PTOT = MIN(params.U_MAX * params.I_MAX, 40.0f);
 
-			params.U_RESOLUTION = 0.01f;
+			params.U_RESOLUTION = 0.005f;
 			params.U_RESOLUTION_DURING_CALIBRATION = 0.001f;
-			params.I_RESOLUTION = 0.01f;
+			params.I_RESOLUTION = 0.005f;
 			params.I_RESOLUTION_DURING_CALIBRATION = 0.001f;
 			params.P_RESOLUTION = 0.001f;
 
@@ -217,7 +220,7 @@ struct DcpChannel : public Channel {
 			params.DAC_MAX = DAC_MAX;
 			params.ADC_MAX = ADC_MAX;
 
-			I_MAX_FOR_REMAP = 2.0000f;
+			I_MAX_FOR_REMAP = 2.500f;
 
 			params.U_RAMP_DURATION_MIN_VALUE = 0.002f;
 
@@ -500,42 +503,42 @@ struct DcpChannel : public Channel {
 		);
 
         dcpChannel.valueBalancing = false;
-    }
+		}
 
-    static void currentBalancing(psu::Channel &channel) {
-        DcpChannel &dcpChannel = (DcpChannel &)channel;
-        if (isNaN(dcpChannel.iBeforeBalancing)) {
-            dcpChannel.iBeforeBalancing = channel.i.set;
-        }
-        dcpChannel.valueBalancing = true;
+		static void currentBalancing(psu::Channel &channel) {
+			DcpChannel &dcpChannel = (DcpChannel &)channel;
+			if (isNaN(dcpChannel.iBeforeBalancing)) {
+				dcpChannel.iBeforeBalancing = channel.i.set;
+			}
+			dcpChannel.valueBalancing = true;
 
-        channel.doSetCurrent(
-        	channel.roundChannelValue(
-        		UNIT_AMPER,
-        		(psu::Channel::get(0).i.mon_last + psu::Channel::get(1).i.mon_last) / 2
-			)
-		);
+			channel.doSetCurrent(
+				channel.roundChannelValue(
+					UNIT_AMPER,
+					(psu::Channel::get(0).i.mon_last + psu::Channel::get(1).i.mon_last) / 2
+				)
+			);
 
-        dcpChannel.valueBalancing = false;
-    }
+			dcpChannel.valueBalancing = false;
+		}
 
-    static void restoreVoltageToValueBeforeBalancing(psu::Channel &channel) {
-        DcpChannel &dcpChannel = (DcpChannel &)channel;
-        if (!isNaN(dcpChannel.uBeforeBalancing)) {
-            //DebugTrace("Restore voltage to value before balancing: %f", uBeforeBalancing);
-            channel.setVoltage(dcpChannel.uBeforeBalancing);
-            dcpChannel.uBeforeBalancing = NAN;
-        }
-    }
+		static void restoreVoltageToValueBeforeBalancing(psu::Channel &channel) {
+			DcpChannel &dcpChannel = (DcpChannel &)channel;
+			if (!isNaN(dcpChannel.uBeforeBalancing)) {
+				//DebugTrace("Restore voltage to value before balancing: %f", uBeforeBalancing);
+				channel.setVoltage(dcpChannel.uBeforeBalancing);
+				dcpChannel.uBeforeBalancing = NAN;
+			}
+		}
 
-    static void restoreCurrentToValueBeforeBalancing(psu::Channel &channel) {
-        DcpChannel &dcpChannel = (DcpChannel &)channel;
-        if (!isNaN(dcpChannel.iBeforeBalancing)) {
-            // DebugTrace("Restore current to value before balancing: %f", index, iBeforeBalancing);
-            channel.setCurrent(dcpChannel.iBeforeBalancing);
-            dcpChannel.iBeforeBalancing = NAN;
-        }
-    }
+		static void restoreCurrentToValueBeforeBalancing(psu::Channel &channel) {
+			DcpChannel &dcpChannel = (DcpChannel &)channel;
+			if (!isNaN(dcpChannel.iBeforeBalancing)) {
+				// DebugTrace("Restore current to value before balancing: %f", index, iBeforeBalancing);
+				channel.setCurrent(dcpChannel.iBeforeBalancing);
+				dcpChannel.iBeforeBalancing = NAN;
+			}
+		}
 	/*
 	#if defined(EEZ_PLATFORM_STM32)
 		void onSpiIrq() {
@@ -823,7 +826,7 @@ public:
     	    }
 
     	    // MCP9700 characteristics
-    	    float ADC_REF_VOLTAGE = 2.048f; // Reference voltage
+    	    float ADC_REF_VOLTAGE = 2.500f; // Reference voltage
     	    float ADC_MAX_VALUE = 4095.0f;  // 12-bit ADC max value
     	    float MCP9700_OFFSET_VOLTAGE = 0.5f; // Voltage at 0°C (500 mV)
     	    float MCP9700_TEMPERATURE_COEFFICIENT = 0.0105f; // 10.05 mV/°C
@@ -859,7 +862,7 @@ public:
 
                     	    	{
                     	            //printf("%d\t", ((uint16_t *)output)[i]);
-                    	    		printf("Reg0 %d\n", output[0]);
+                    	    		//printf("Reg0 %d\n", output[0]);
                     	            reg0_old = output[0];
                     	    	}
                     	     }
@@ -887,7 +890,7 @@ public:
 
                 uint16_t iMonAdc = inputSetValues[offset + 1];
                 channel.iMonAdc = iMonAdc;
-                const float FULL_SCALE = 2.0F;
+                const float FULL_SCALE = 2.5F;
                 const float U_REF = 2.5F;
                 float iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP);
                 iMon = roundPrec(iMon, I_MON_RESOLUTION);
