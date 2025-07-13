@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
     /* Enable D-Cache */
     //SCB_EnableDCache();
 #endif
-
+    printf("Hello World\n");
     g_mainTaskHandle = osThreadCreate(osThread(g_mainTask), nullptr);
 
     osKernelStart();

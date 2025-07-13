@@ -168,7 +168,7 @@ void hardResetModules() {
     delay(5);
     io_exp::writeToOutputPort(0b10000000);
 	// give some time to the modules to initialize
-	osDelay(100);
+	osDelay(500);
 #endif
 }
 

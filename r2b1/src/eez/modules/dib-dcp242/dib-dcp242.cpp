@@ -84,7 +84,6 @@ static const uint16_t ADC_MAX = 32767;
 
 
 #define BUFFER_SIZE 14
-//#define BUFFER_SIZE 18
 
 static const float PTOT = 40.0f;
 static const float I_MON_RESOLUTION = 0.02f;
@@ -94,6 +93,7 @@ static const float I_MON_RESOLUTION = 0.02f;
 #define REG0_PWRGOOD_MASK 		(1 << 2)
 #define REG0_DP_MASK	  		(1 << 3)
 #define REG0_R_SENSE_MASK	  	(1 << 4)
+#define REG0_R_PROG_MASK		(1 << 5)
 
 uint32_t lastAdcStartTickCounter = 0;
 uint8_t reg0_old = 0;
@@ -103,6 +103,7 @@ uint8_t reg0_old = 0;
 struct DcpChannel : public Channel {
 		bool outputEnable;
 		bool r_sense;
+		bool r_prog;
 
 		bool delayed_dp_off;
 		uint32_t delayed_dp_off_start;
@@ -127,8 +128,6 @@ struct DcpChannel : public Channel {
 
 	    uint16_t uMonAdc = 0;
 	    uint16_t iMonAdc = 0;
-	    //uint32_t uMonAdc = 0;
-	    //uint32_t iMonAdc = 0;
 
 	    float temperature = 25.0f;
 
@@ -212,7 +211,7 @@ struct DcpChannel : public Channel {
 			params.CALIBRATION_MID_TOLERANCE_PERCENT = 3.0f;
 
 			params.features = CH_FEATURE_VOLT | CH_FEATURE_CURRENT | CH_FEATURE_POWER | CH_FEATURE_OE |
-			    CH_FEATURE_DPROG | CH_FEATURE_RPOL | //CH_FEATURE_RPROG |
+			    CH_FEATURE_DPROG | CH_FEATURE_RPOL | CH_FEATURE_RPROG |
 				CH_FEATURE_HW_OVP | CH_FEATURE_COUPLING;
 
 			params.MON_REFRESH_RATE_MS = 500;
@@ -429,9 +428,15 @@ struct DcpChannel : public Channel {
 			return;
 		}
 
-		/*void setRemoteProgramming(bool enable) override {
-			ioexp.changeBit(IOExpander::IO_BIT_OUT_REMOTE_PROGRAMMING, enable);
-			}*/
+		void setRemoteProgramming(bool enable) override {
+			//Enable remote programming
+
+			if (enable) {
+				r_prog = enable;
+			}
+
+			return;
+		}
 
 	    void setDacVoltage(uint16_t value) override {
 
@@ -846,7 +851,8 @@ public:
     void tick(uint8_t slotIndex) {
         DcpChannel &channel1 = (DcpChannel &)*Channel::getBySlotIndex(slotIndex, 0);
 
-        output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | (channel1.r_sense ? REG0_R_SENSE_MASK : 0);
+        output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | (channel1.r_sense ? REG0_R_SENSE_MASK : 0) | (channel1.r_prog ? REG0_R_PROG_MASK : 0);
+        //output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | REG0_R_SENSE_MASK | (channel1.r_prog ? REG0_R_PROG_MASK : 0);
 
         output[1] = 0;
 
@@ -862,7 +868,7 @@ public:
 
                     	    	{
                     	            //printf("%d\t", ((uint16_t *)output)[i]);
-                    	    		//printf("Reg0 %d\n", output[0]);
+                    	    		printf("Reg0 %d\n", output[0]);
                     	            reg0_old = output[0];
                     	    	}
                     	     }
