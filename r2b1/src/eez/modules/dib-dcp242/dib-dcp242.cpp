@@ -40,6 +40,7 @@
 #include <eez/modules/psu/psu.h>
 #include <eez/modules/psu/profile.h>
 #include <eez/modules/psu/channel_dispatcher.h>
+#include <eez/modules/psu/channel.h>
 #include <eez/modules/psu/trigger.h>
 #include <eez/modules/psu/gui/psu.h>
 #include <eez/modules/psu/gui/edit_mode.h>
@@ -81,19 +82,20 @@ static const uint16_t DAC_MAX = 65535;
 static const uint16_t ADC_MIN = 0;
 static const uint16_t ADC_MAX = 32767;
 
-
-
 #define BUFFER_SIZE 14
 
 static const float PTOT = 40.0f;
 static const float I_MON_RESOLUTION = 0.02f;
 
-#define REG0_OE_MASK      		(1 << 0)
-#define REG0_CC_MASK      		(1 << 1)
-#define REG0_PWRGOOD_MASK 		(1 << 2)
-#define REG0_DP_MASK	  		(1 << 3)
-#define REG0_R_SENSE_MASK	  	(1 << 4)
-#define REG0_R_PROG_MASK		(1 << 5)
+#define REG0_OE_MASK      		(1 << 0)  //output
+#define REG0_DP_MASK	  		(1 << 3)  //output
+#define REG0_R_SENSE_MASK	  	(1 << 4)  //output
+#define REG0_R_PROG_MASK		(1 << 5)  //output
+#define REG0_HW_OVP_EN_MASK		(1 << 6)  //output
+
+#define REG0_CC_MASK      		(1 << 1)  //input
+#define REG0_PWRGOOD_MASK 		(1 << 2)  //input
+#define REG0_HW_OVP_MASK		(1 << 7)  //input
 
 uint32_t lastAdcStartTickCounter = 0;
 uint8_t reg0_old = 0;
@@ -104,6 +106,7 @@ struct DcpChannel : public Channel {
 		bool outputEnable;
 		bool r_sense;
 		bool r_prog;
+		bool hwOvpEn;
 
 		bool delayed_dp_off;
 		uint32_t delayed_dp_off_start;
@@ -241,7 +244,10 @@ struct DcpChannel : public Channel {
 			iBeforeBalancing = NAN;
 			}
 
-	    bool test() override;
+	    bool test() override {
+
+	    	//To do by RM
+	    }
 
 	    void tickSpecific() override;
 
@@ -404,7 +410,7 @@ struct DcpChannel : public Channel {
 
 	    }
 
-		/*void setDprogState(DprogState dprogState) override {
+		void setDprogState(DprogState dprogState) override {
 				if (!isPsuThread()) {
 					sendMessageToPsu(PSU_MESSAGE_SET_DPROG_STATE, (channelIndex << 8) | dprogState);
 				} else {
@@ -417,7 +423,7 @@ struct DcpChannel : public Channel {
 					}
 					delayed_dp_off = false;
 				}
-		    }*/
+		    }
 
 		void setRemoteSense(bool enable) override {
 				//Enables Sense input selection relay
@@ -453,9 +459,7 @@ struct DcpChannel : public Channel {
 		void setDacVoltageFloat(float value) override {
 			#if defined(EEZ_PLATFORM_STM32)
 					value = remap(value, 0, (float)DAC_MIN, params.U_MAX, (float)DAC_MAX);
-					//printf("voltage value is x\n");
 					uSet = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
-					//printf("Back\n");
 			#endif
 			}
 
@@ -544,20 +548,29 @@ struct DcpChannel : public Channel {
 				dcpChannel.iBeforeBalancing = NAN;
 			}
 		}
-	/*
-	#if defined(EEZ_PLATFORM_STM32)
+
+		//below logic is replaced by callHwOvpProtectioin function, testing pending
+	/*#if defined(EEZ_PLATFORM_STM32)
 		void onSpiIrq() {
 			uint8_t intcap = ioexp.readIntcapRegister();
 			// DebugTrace("CH%d INTCAP 0x%02X\n", (int)(channelIndex + 1), (int)intcap);
 			if (!(intcap & (1 << IOExpander::R2B5_IO_BIT_IN_OVP_FAULT))) {
 				if (isOutputEnabled() && isHwOvpEnabled() && !io_pins::isInhibited()) {
 					protectionEnter(ovp, true);
+
 				}
 			} else if (!(intcap & (1 << IOExpander::IO_BIT_IN_PWRGOOD))) {
 				NVIC_SystemReset();
 			}
 		}
 	#endif*/
+
+
+
+		void callHwOvpProtectionEnter()
+		{
+			protectionEnter(ovp, true);
+		}
 
 		void getVoltageStepValues(StepValues *stepValues, bool calibrationMode) override {
 	        static float values[] = { 0.01f, 0.1f, 0.5f, 1.0f};
@@ -851,9 +864,7 @@ public:
     void tick(uint8_t slotIndex) {
         DcpChannel &channel1 = (DcpChannel &)*Channel::getBySlotIndex(slotIndex, 0);
 
-        output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | (channel1.r_sense ? REG0_R_SENSE_MASK : 0) | (channel1.r_prog ? REG0_R_PROG_MASK : 0);
-        //output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | REG0_R_SENSE_MASK | (channel1.r_prog ? REG0_R_PROG_MASK : 0);
-
+        output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | (channel1.r_sense ? REG0_R_SENSE_MASK : 0) | (channel1.r_prog ? REG0_R_PROG_MASK : 0) | (channel1.hwOvpEn ? REG0_HW_OVP_EN_MASK : 0);
         output[1] = 0;
 
         uint16_t *outputSetValues = (uint16_t *)(output + 2);
@@ -909,6 +920,12 @@ public:
                     powerDownOnlyPowerChannels();
                 }
 #endif
+                bool hwOvp = input[0] & REG0_HW_OVP_MASK ? true : false;
+                if (hwOvp) {
+                	generateChannelError(SCPI_ERROR_CH2_OUTPUT_FAULT_DETECTED,channel.channelIndex);
+                	channel.callHwOvpProtectionEnter();
+                }
+
                 uint16_t tempAdc = inputSetValues[offset + 2];
                 channel.temperature = calcTemperature(tempAdc);
 
