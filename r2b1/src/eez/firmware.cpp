@@ -136,6 +136,7 @@ void boot() {
 
     bp3c::eeprom::init();
     bp3c::eeprom::test();
+    //bp3c::eeprom::resetAllExceptOnTimeCounters(0); //to reset eeprom of module 0
 
     bp3c::io_exp::init();
 

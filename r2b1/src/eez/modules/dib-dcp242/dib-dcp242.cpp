@@ -88,17 +88,23 @@ static const float PTOT = 40.0f;
 static const float I_MON_RESOLUTION = 0.02f;
 
 #define REG0_OE_MASK      		(1 << 0)  //output
+#define REG0_CC_MASK      		(1 << 1)  //input
+#define REG0_PWRGOOD_MASK 		(1 << 2)  //input
 #define REG0_DP_MASK	  		(1 << 3)  //output
 #define REG0_R_SENSE_MASK	  	(1 << 4)  //output
 #define REG0_R_PROG_MASK		(1 << 5)  //output
 #define REG0_HW_OVP_EN_MASK		(1 << 6)  //output
 
-#define REG0_CC_MASK      		(1 << 1)  //input
-#define REG0_PWRGOOD_MASK 		(1 << 2)  //input
-#define REG0_HW_OVP_MASK		(1 << 7)  //input
+
+#define REG1_C_RANGE_MASK	  	(1 << 0)  //output  0= 5A; 1 = 50ma
+#define REG1_HW_OVP_MASK		(1 << 1)  //input
+#define REG1_RPOL_MASK			(1 << 2)  //input
+
+
 
 uint32_t lastAdcStartTickCounter = 0;
 uint8_t reg0_old = 0;
+uint8_t	reg1_old = 1;
 
 
 
@@ -107,6 +113,8 @@ struct DcpChannel : public Channel {
 		bool r_sense;
 		bool r_prog;
 		bool hwOvpEn;
+		bool currentRangeLow; //0 = 5A; 1 = 50ma
+		bool rPol;
 
 		bool delayed_dp_off;
 		uint32_t delayed_dp_off_start;
@@ -138,6 +146,7 @@ struct DcpChannel : public Channel {
 
 		float U_CAL_POINTS[2];
 		float I_CAL_POINTS[2];
+		float I_LOW_RANGE_CAL_POINTS[2];
 
 		bool valueBalancing = false;
 
@@ -150,9 +159,11 @@ struct DcpChannel : public Channel {
 
 		void getParams(uint16_t moduleRevision) override {
 
-			params.U_MIN = 1.0f;
+			params.U_MIN = 0.1f;
 			params.U_DEF = 5.0f;
 			params.U_MAX = 25.0f;
+			params.U_CAL_NUM_POINTS = 2;
+			params.U_CAL_POINTS = U_CAL_POINTS;
 
 			params.U_MIN_STEP = 0.01f;
 			params.U_DEF_STEP = 0.1f;
@@ -160,26 +171,29 @@ struct DcpChannel : public Channel {
 
 			U_CAL_POINTS[0] = 2.0f;
 			U_CAL_POINTS[1] = 18.0f;
-			params.U_CAL_NUM_POINTS = 2;
-			params.U_CAL_POINTS = U_CAL_POINTS;
-			params.U_CAL_I_SET = 1.0f;
+			params.U_CAL_I_SET = 0.1f;
 
-			params.I_MIN = 0.01f;
+			params.I_MIN = 0.001f;
 			params.I_DEF = 0.01f;
 			params.I_MAX = 2.5f;
 
-	    	params.I_MON_MIN = 0.01f;
+	    	params.I_MON_MIN = 0.001f;
 
 			params.I_MIN_STEP = 0.01f;
 			params.I_DEF_STEP = 0.01f;
 			params.I_MAX_STEP = 1.0f;
 
-	        I_CAL_POINTS[0] = 0.1f;
-	        I_CAL_POINTS[1] = 0.2f;
-	        I_CAL_POINTS[2] = 0.3f;
-	        params.I_CAL_NUM_POINTS = 3;
+			I_CAL_POINTS[0] = 0.25f;
+			I_CAL_POINTS[1] = 2.0f;
+			params.I_CAL_NUM_POINTS = 2;
 			params.I_CAL_POINTS = I_CAL_POINTS;
 			params.I_CAL_U_SET = 20.0f;
+
+			I_LOW_RANGE_CAL_POINTS[0] = I_CAL_POINTS[0] / 10;
+			I_LOW_RANGE_CAL_POINTS[1] = I_CAL_POINTS[1] / 10;
+			params.I_LOW_RANGE_CAL_NUM_POINTS = 2;
+			params.I_LOW_RANGE_CAL_POINTS = I_LOW_RANGE_CAL_POINTS;
+			params.I_LOW_RANGE_CAL_U_SET = 20.0f;
 
 			params.OVP_DEFAULT_STATE = false;
 			params.OVP_MIN_DELAY = 0.0f;
@@ -198,23 +212,25 @@ struct DcpChannel : public Channel {
 			params.OPP_MIN_LEVEL = 0.0f;
 			params.OPP_DEFAULT_LEVEL = 80.0f;
 
-			params.PTOT = MIN(params.U_MAX * params.I_MAX, 40.0f);
+			params.PTOT = MIN(params.U_MAX * params.I_MAX, 62.5f);
 
 			params.U_RESOLUTION = 0.005f;
-			params.U_RESOLUTION_DURING_CALIBRATION = 0.001f;
-			params.I_RESOLUTION = 0.005f;
-			params.I_RESOLUTION_DURING_CALIBRATION = 0.001f;
+			params.U_RESOLUTION_DURING_CALIBRATION = 0.0001f;
+			params.I_RESOLUTION = 0.0005f;
+			params.I_RESOLUTION_DURING_CALIBRATION = 0.00001f;
+			params.I_LOW_RESOLUTION = 0.000005f;
+			params.I_LOW_RESOLUTION_DURING_CALIBRATION = 0.0000001f;
 			params.P_RESOLUTION = 0.001f;
 
-			params.VOLTAGE_GND_OFFSET = 0;
-			params.CURRENT_GND_OFFSET = 0;
+			params.VOLTAGE_GND_OFFSET = 0.5f;
+			params.CURRENT_GND_OFFSET = 0.00f;
 
 			params.CALIBRATION_DATA_TOLERANCE_PERCENT = 15.0f;
 
 			params.CALIBRATION_MID_TOLERANCE_PERCENT = 3.0f;
 
 			params.features = CH_FEATURE_VOLT | CH_FEATURE_CURRENT | CH_FEATURE_POWER | CH_FEATURE_OE |
-			    CH_FEATURE_DPROG | CH_FEATURE_RPOL | CH_FEATURE_RPROG |
+			    CH_FEATURE_DPROG | CH_FEATURE_RPOL | CH_FEATURE_RPROG | CH_FEATURE_CURRENT_DUAL_RANGE |
 				CH_FEATURE_HW_OVP | CH_FEATURE_COUPLING;
 
 			params.MON_REFRESH_RATE_MS = 500;
@@ -226,8 +242,9 @@ struct DcpChannel : public Channel {
 
 			params.U_RAMP_DURATION_MIN_VALUE = 0.002f;
 
-	        params.OCP_TRIP_LEVEL_PERCENT = 90.0f;
-			params.OCP_TRIP_LEVEL_PERCENT_MIN_VALUE_HIGH_RANGE = 0.1f;
+			params.OCP_TRIP_LEVEL_PERCENT = 99.9f;
+			params.OCP_TRIP_LEVEL_PERCENT_MIN_VALUE_HIGH_RANGE = 0.0005f;
+			params.OCP_TRIP_LEVEL_PERCENT_MIN_VALUE_LOW_RANGE = 0.000005f;
 			}
 
 	    void onPowerDown() override;
@@ -244,10 +261,7 @@ struct DcpChannel : public Channel {
 			iBeforeBalancing = NAN;
 			}
 
-	    bool test() override {
-
-	    	//To do by RM
-	    }
+	    bool test() override;
 
 	    void tickSpecific() override;
 
@@ -265,6 +279,10 @@ struct DcpChannel : public Channel {
 			return !isInCcMode();
 			}
 
+	    unsigned getRPol() override {
+	    		return rPol;
+	    	}
+
 		bool isOvpEnabled() override {
 				if (prot_conf.flags.u_state) {
 					auto &slot = *g_slots[slotIndex];
@@ -280,6 +298,14 @@ struct DcpChannel : public Channel {
 		bool isHwOvpEnabled() {
 			    return isOvpEnabled() && prot_conf.flags.u_type && !flags.rprogEnabled;
 		    }
+
+		bool isOverHwOvpThreshold(){
+			//to do for RM
+		    static const float CONF_OVP_HW_VOLTAGE_THRESHOLD = 1.0f;
+		    Channel &channel = Channel::get(channelIndex);
+		    float u_set = remap(uSet, (float)DAC_MIN, channel.params.U_MIN, (float)DAC_MAX, channel.params.U_MAX);   //m_uRampLastValue is replaced by uSet
+		    return u_set > channel.getCalibratedVoltage(CONF_OVP_HW_VOLTAGE_THRESHOLD);
+		}
 
 		void adcMeasureUMon() override {
 		    }
@@ -322,22 +348,26 @@ struct DcpChannel : public Channel {
 	        if (enable) {
 	        			// OE
 	        			if (tasks & OUTPUT_ENABLE_TASK_OE) {
-	        				//ioexp.changeBit(IOExpander::IO_BIT_OUT_OVP_ENABLE, false);
 	        				outputEnable = enable;
 	        				u.resetMonValues();
 	        				i.resetMonValues();
 	        				}
 
+	        			// Current range
+						if (tasks & OUTPUT_ENABLE_TASK_CURRENT_RANGE) {
+							doSetCurrentRange();
+						}
+
 	        			// OVP
-	        			/*if (tasks & OUTPUT_ENABLE_TASK_OVP) {
+	        			if (tasks & OUTPUT_ENABLE_TASK_OVP) {
 	        				if (isHwOvpEnabled()) {
-	        					if (dac.isOverHwOvpThreshold()) {
+	        					if (isOverHwOvpThreshold()) {
 	        						// OVP has to be enabled after OE activation
 	        						prot_conf.flags.u_hwOvpDeactivated = 0;
-	        						ioexp.changeBit(IOExpander::IO_BIT_OUT_OVP_ENABLE, true);
+	        						hwOvpEn = enable;
 									}
 								}
-							}*/
+							}
 
 	        			// DP
 	        			if (tasks & OUTPUT_ENABLE_TASK_DP) {
@@ -352,19 +382,24 @@ struct DcpChannel : public Channel {
 	        		}
 	        else {
 	        			// OVP
-	        			/*if (tasks & OUTPUT_ENABLE_TASK_OVP) {
+	        			if (tasks & OUTPUT_ENABLE_TASK_OVP) {
 	        				if (isHwOvpEnabled()) {
 	        					// OVP has to be disabled before OE deactivation
 	        					prot_conf.flags.u_hwOvpDeactivated = 1;
-	        					ioexp.changeBit(IOExpander::IO_BIT_OUT_OVP_ENABLE, false);
+	        					hwOvpEn = false;
 	        				}
-	        			}*/
+	        			}
 
 	        			// OE
 	        			if (tasks & OUTPUT_ENABLE_TASK_OE) {
 	        				outputEnable = false;
 	        				u.resetMonValues();
 	        				i.resetMonValues();
+	        				}
+
+	        			// Current range
+	        			if (tasks & OUTPUT_ENABLE_TASK_CURRENT_RANGE) {
+	        				doSetCurrentRange();
 	        				}
 
 	        			// DP
@@ -409,6 +444,35 @@ struct DcpChannel : public Channel {
 	        		}
 
 	    }
+
+		void doSetCurrentRange() override {
+
+			//below code is to be verified
+
+			auto &slot = *g_slots[slotIndex];
+
+					if (!hasSupportForCurrentDualRange()) {
+						return;
+					}
+
+					if (isOutputEnabled() && !io_pins::isInhibited()) {
+						//if (flags.currentCurrentRange == 0 || dac.isTesting()) {
+						if (flags.currentCurrentRange == 0) {
+							// 5A
+							// DebugTrace("CH%d: Switched to 5A range", channelIndex + 1);
+							currentRangeLow = false;
+							// calculateNegligibleAdcDiffForCurrent();
+						} else {
+							// 250mA
+							// DebugTrace("CH%d: Switched to 250mA range", channelIndex + 1);
+							currentRangeLow = true;
+							// calculateNegligibleAdcDiffForCurrent();
+						}
+					} else {
+						currentRangeLow = false;
+					}
+
+		}
 
 		void setDprogState(DprogState dprogState) override {
 				if (!isPsuThread()) {
@@ -548,24 +612,6 @@ struct DcpChannel : public Channel {
 				dcpChannel.iBeforeBalancing = NAN;
 			}
 		}
-
-		//below logic is replaced by callHwOvpProtectioin function, testing pending
-	/*#if defined(EEZ_PLATFORM_STM32)
-		void onSpiIrq() {
-			uint8_t intcap = ioexp.readIntcapRegister();
-			// DebugTrace("CH%d INTCAP 0x%02X\n", (int)(channelIndex + 1), (int)intcap);
-			if (!(intcap & (1 << IOExpander::R2B5_IO_BIT_IN_OVP_FAULT))) {
-				if (isOutputEnabled() && isHwOvpEnabled() && !io_pins::isInhibited()) {
-					protectionEnter(ovp, true);
-
-				}
-			} else if (!(intcap & (1 << IOExpander::IO_BIT_IN_PWRGOOD))) {
-				NVIC_SystemReset();
-			}
-		}
-	#endif*/
-
-
 
 		void callHwOvpProtectionEnter()
 		{
@@ -865,7 +911,7 @@ public:
         DcpChannel &channel1 = (DcpChannel &)*Channel::getBySlotIndex(slotIndex, 0);
 
         output[0] = 0x80 | (channel1.outputEnable ? REG0_OE_MASK : 0) | (channel1.dpOn ? REG0_DP_MASK : 0) | (channel1.r_sense ? REG0_R_SENSE_MASK : 0) | (channel1.r_prog ? REG0_R_PROG_MASK : 0) | (channel1.hwOvpEn ? REG0_HW_OVP_EN_MASK : 0);
-        output[1] = 0;
+        output[1] = 0x80 | (channel1.currentRangeLow ? REG1_C_RANGE_MASK : 0);
 
         uint16_t *outputSetValues = (uint16_t *)(output + 2);
         outputSetValues[0] = channel1.uSet;
@@ -920,11 +966,13 @@ public:
                     powerDownOnlyPowerChannels();
                 }
 #endif
-                bool hwOvp = input[0] & REG0_HW_OVP_MASK ? true : false;
+                bool hwOvp = input[1] & REG1_HW_OVP_MASK ? true : false;
                 if (hwOvp) {
-                	generateChannelError(SCPI_ERROR_CH2_OUTPUT_FAULT_DETECTED,channel.channelIndex);
+                	//generateChannelError(SCPI_ERROR_CH2_OUTPUT_FAULT_DETECTED,channel.channelIndex);
                 	channel.callHwOvpProtectionEnter();
                 }
+
+                channel.rPol = input[1] & REG1_RPOL_MASK ? true : false;
 
                 uint16_t tempAdc = inputSetValues[offset + 2];
                 channel.temperature = calcTemperature(tempAdc);

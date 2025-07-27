@@ -682,7 +682,7 @@ float Channel::getCurrentResolution(float value) const {
     float precision = calibration::isChannelCalibrating(*this) ? params.I_RESOLUTION_DURING_CALIBRATION : params.I_RESOLUTION; // 0.5mA
 
     if (hasSupportForCurrentDualRange()) {
-        if (!isNaN(value) && value <= 0.05f && isMicroAmperAllowed()) {
+        if (!isNaN(value) && value <= 0.25f && isMicroAmperAllowed()) {
             precision = calibration::isChannelCalibrating(*this) ? params.I_LOW_RESOLUTION_DURING_CALIBRATION : params.I_LOW_RESOLUTION; // 5uA
         }
     }
@@ -1189,7 +1189,7 @@ void Channel::doSetCurrent(float value) {
     if (!calibration::isChannelCalibrating(*this)) {
         if (hasSupportForCurrentDualRange()) {
             if (flags.currentRangeSelectionMode == CURRENT_RANGE_SELECTION_USE_BOTH) {
-                setCurrentRange(value > 0.05f ? CURRENT_RANGE_HIGH : CURRENT_RANGE_LOW);
+                setCurrentRange(value > 0.25f ? CURRENT_RANGE_HIGH : CURRENT_RANGE_LOW);
             } else if (flags.currentRangeSelectionMode == CURRENT_RANGE_SELECTION_ALWAYS_HIGH) {
                 setCurrentRange(CURRENT_RANGE_HIGH);
             } else {
@@ -1356,7 +1356,7 @@ void Channel::setCurrentLimit(float limit) {
 float Channel::getMaxCurrentLimit() const {
     float limit;
     if (hasSupportForCurrentDualRange() && flags.currentRangeSelectionMode == CURRENT_RANGE_SELECTION_ALWAYS_LOW) {
-        limit = 0.05f;
+        limit = 0.25f;
     } else {
         limit = isMaxCurrentLimited() ? ERR_MAX_CURRENT : i.max;
     }
@@ -1470,7 +1470,8 @@ float Channel::getDualRangeGndOffset() {
 #ifdef EEZ_PLATFORM_SIMULATOR
     return 0;
 #else
-    return flags.currentCurrentRange == CURRENT_RANGE_LOW ? (params.CURRENT_GND_OFFSET / 100) : params.CURRENT_GND_OFFSET;
+    //return flags.currentCurrentRange == CURRENT_RANGE_LOW ? (params.CURRENT_GND_OFFSET / 100) : params.CURRENT_GND_OFFSET;
+    return flags.currentCurrentRange == CURRENT_RANGE_LOW ? (params.CURRENT_GND_OFFSET / 10) : params.CURRENT_GND_OFFSET;
 #endif
 }
 
@@ -1482,7 +1483,7 @@ void Channel::setCurrentRangeSelectionMode(CurrentRangeSelectionMode mode) {
     flags.currentRangeSelectionMode = mode;
 
     if (flags.currentRangeSelectionMode == CURRENT_RANGE_SELECTION_ALWAYS_LOW) {
-        float limit = 0.05f;
+        float limit = 0.25f;
         if (i.set > limit) {
             i.set = limit;
         }
@@ -1503,7 +1504,8 @@ void Channel::enableAutoSelectCurrentRange(bool enable) {
 }
 
 float Channel::getDualRangeMax() {
-    return flags.currentCurrentRange == CURRENT_RANGE_LOW ? (params.I_MAX / 100) : params.I_MAX;
+    //return flags.currentCurrentRange == CURRENT_RANGE_LOW ? (params.I_MAX / 100) : params.I_MAX;
+    return flags.currentCurrentRange == CURRENT_RANGE_LOW ? (params.I_MAX / 10) : params.I_MAX;
 }
 
 void Channel::setCurrentRange(uint8_t currentCurrentRange) {
@@ -1530,11 +1532,13 @@ void Channel::doAutoSelectCurrentRange() {
                     !isDacTesting() &&
                     !calibration::isChannelCalibrating(*this)) {
                     if (flags.currentCurrentRange == CURRENT_RANGE_LOW) {
-                        if (i.set > 0.05f && isCcMode()) {
+                        //if (i.set > 0.05f && isCcMode()) {
+                        if (i.set > 0.25f && isCcMode()) {
                             doSetCurrent(i.set);
                         }
                     } else if (i.mon_measured) {
-                        if (i.mon_last < 0.05f) {
+                        //if (i.mon_last < 0.05f) {
+                        if (i.mon_last < 0.25f) {
                             setCurrentRange(1);
                             setDacCurrent((uint16_t)65535);
                         }
