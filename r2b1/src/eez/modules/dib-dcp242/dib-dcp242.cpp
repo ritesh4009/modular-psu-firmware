@@ -44,6 +44,7 @@
 #include <eez/modules/psu/trigger.h>
 #include <eez/modules/psu/gui/psu.h>
 #include <eez/modules/psu/gui/edit_mode.h>
+#include <eez/modules/psu/ramp.h>
 
 #include <eez/modules/bp3c/comm.h>
 
@@ -72,7 +73,43 @@ namespace eez {
 //using namespace gui;
 using namespace psu;
 
+TestResult testResult;
+
+uint16_t m_uLastValue;
+uint16_t m_iLastValue;
+
+// U ramp
+bool m_uIsRampActive = false;
+uint16_t m_uRampLastValue;
+uint16_t m_uRampTargetValue;
+uint32_t m_uRampStartTimeUsec;
+
+// I ramp
+bool m_iIsRampActive = false;
+uint16_t m_iRampLastValue;
+uint16_t m_iRampTargetValue;
+uint32_t m_iRampStartTimeUsec;
+
+enum RampOption {
+	NO_RAMP,
+	WITH_RAMP,
+	FROM_RAMP
+};
+
 namespace dcp242 {
+
+using namespace ramp;
+
+static const uint8_t USET = 0;
+static const uint8_t ISET = 1;
+
+#if CONF_SURVIVE_MODE
+static const uint32_t CONF_U_RAMP_DURATION_USEC = 4000; // 4 ms
+static const uint32_t CONF_I_RAMP_DURATION_USEC = 300000; // 300 ms
+#else
+static const uint32_t CONF_U_RAMP_DURATION_USEC = 2000; // 2 ms
+static const uint32_t CONF_I_RAMP_DURATION_USEC = 2000; // 2 ms
+#endif
 
 static const uint16_t MODULE_REVISION_DCP242_R1B1  = 0x0242;
 
@@ -100,19 +137,35 @@ static const float I_MON_RESOLUTION = 0.02f;
 #define REG1_HW_OVP_MASK		(1 << 1)  //input
 #define REG1_RPOL_MASK			(1 << 2)  //input
 
+#if defined(EEZ_PLATFORM_STM32)
+    void set(uint8_t buffer, uint16_t value, RampOption rampOption = NO_RAMP);
+    void set(uint8_t buffer, float value);
+#endif
 
+void setVoltage(float voltage, RampOption rampOption = NO_RAMP);
+void setDacVoltage(uint16_t value);
+void setCurrent(float voltage, RampOption rampOption = NO_RAMP);
+void setDacCurrent(uint16_t value);
+
+bool m_testing = FALSE;  //temp initialized with false by RM
+
+bool isOverHwOvpThreshold();
+
+bool isRampActive() {
+	return m_uIsRampActive|| m_iIsRampActive;
+}
 
 uint32_t lastAdcStartTickCounter = 0;
 uint8_t reg0_old = 0;
 uint8_t	reg1_old = 1;
 
-
-
 struct DcpChannel : public Channel {
+		//DigitalAnalogConverter1 dac1;
 		bool outputEnable;
 		bool r_sense;
 		bool r_prog;
 		bool hwOvpEn;
+		bool hwOvpFlag = false;
 		bool currentRangeLow; //0 = 5A; 1 = 50ma
 		bool rPol;
 
@@ -121,9 +174,12 @@ struct DcpChannel : public Channel {
 		bool dpOn;
 		uint32_t dpNegMonitoringTimeMs = 0;
 
+		bool fallingEdge;
+		uint32_t fallingEdgeTimeout;
+		float fallingEdgePreviousUMonAdc;
+
 		float uBeforeBalancing = NAN;
 		float iBeforeBalancing = NAN;
-
 
 		#if defined(EEZ_PLATFORM_STM32)
 			uint16_t uSet;
@@ -222,7 +278,7 @@ struct DcpChannel : public Channel {
 			params.I_LOW_RESOLUTION_DURING_CALIBRATION = 0.0000001f;
 			params.P_RESOLUTION = 0.001f;
 
-			params.VOLTAGE_GND_OFFSET = 0.5f;
+			params.VOLTAGE_GND_OFFSET = 0.00f;
 			params.CURRENT_GND_OFFSET = 0.00f;
 
 			params.CALIBRATION_DATA_TOLERANCE_PERCENT = 15.0f;
@@ -298,6 +354,108 @@ struct DcpChannel : public Channel {
 		bool isHwOvpEnabled() {
 			    return isOvpEnabled() && prot_conf.flags.u_type && !flags.rprogEnabled;
 		    }
+
+		void dactick() {
+		#if defined(EEZ_PLATFORM_STM32)
+		    if (m_uIsRampActive) {
+		        uint16_t value;
+
+		        uint32_t tickCountUsec = micros();
+
+		        uint32_t diff = tickCountUsec - m_uRampStartTimeUsec;
+		        if (diff >= CONF_U_RAMP_DURATION_USEC) {
+		            value = m_uRampTargetValue;
+		            m_uIsRampActive = false;
+		        } else {
+		            value = m_uRampTargetValue * diff / CONF_U_RAMP_DURATION_USEC;
+		        }
+
+		        set(USET, value, FROM_RAMP);
+		    }
+
+		    if (m_iIsRampActive) {
+		        uint16_t value;
+
+		        uint32_t tickCountUsec = micros();
+
+		        uint32_t diff = tickCountUsec - m_iRampStartTimeUsec;
+		        if (diff >= CONF_I_RAMP_DURATION_USEC) {
+		            value = m_iRampTargetValue;
+		            m_iIsRampActive = false;
+		        } else {
+		            value = m_iRampTargetValue * diff / CONF_I_RAMP_DURATION_USEC;
+		        }
+
+		        set(ISET, value, FROM_RAMP);
+		    }
+		#endif // EEZ_PLATFORM_STM32
+		}
+
+		bool dactest() {
+			m_testing = false;   //added by ritesh for temporary
+		    /*testResult = TEST_OK;
+
+		#if defined(EEZ_PLATFORM_STM32)
+		    if (ioexp.testResult != TEST_OK) {
+		        testResult = TEST_SKIPPED;
+		        return true;
+		    }
+
+		    if (adc.testResult != TEST_OK) {
+		        testResult = TEST_SKIPPED;
+		        return true;
+		    }
+
+		    m_testing = true;
+
+		    auto &channel = Channel::get(channelIndex);
+
+		    channel.calibrationEnableNoEvent(false);
+		    channel.setCurrentRangeSelectionMode(CURRENT_RANGE_SELECTION_USE_BOTH);
+		    channel.setCurrentRange(CURRENT_RANGE_HIGH);
+		    channel.setCurrentLimit(2.5f);
+
+		    // set U on DAC and check it on ADC
+		    float uSet = channel.u.max / 2;
+		    float iSet = channel.i.max / 2;
+
+		    //channel.setVoltage(uSet);
+		    //channel.setCurrent(iSet);
+
+		    channel.adcMeasureMonDac();
+
+		    channel.setVoltage(0);
+		    channel.setCurrent(0);
+
+		    float uMon = channel.u.mon_dac_last;
+		    float uDiff = uMon - uSet;
+		    if (fabsf(uDiff) > uSet * DAC_TEST_TOLERANCE / 100) {
+		        testResult = TEST_FAILED;
+		        DebugTrace("Ch%d DAC test, U_set failure: expected=%g, got=%g, abs diff=%g\n", channel.channelIndex + 1, uSet, uMon, uDiff);
+		    }
+
+		    float iMon = channel.i.mon_dac_last;
+		    float iDiff = iMon - iSet;
+		    if (fabsf(iDiff) > iSet * DAC_TEST_TOLERANCE / 100) {
+		        testResult = TEST_FAILED;
+		        DebugTrace("Ch%d DAC test, I_set failure: expected=%g, got=%g, abs diff=%g\n", channel.channelIndex + 1, iSet, iMon, iDiff);
+		    }
+
+		    if (testResult == TEST_FAILED) {
+		        generateChannelError(SCPI_ERROR_CH1_DAC_TEST_FAILED, channel.channelIndex);
+		    } else {
+		        testResult = TEST_OK;
+		    }
+
+		    m_testing = false;
+		#endif
+
+		#if defined(EEZ_PLATFORM_SIMULATOR)
+		    testResult = TEST_OK;
+		#endif
+
+		    return testResult != TEST_FAILED;*/
+		}
 
 		bool isOverHwOvpThreshold(){
 			//to do for RM
@@ -449,7 +607,7 @@ struct DcpChannel : public Channel {
 
 			//below code is to be verified
 
-			auto &slot = *g_slots[slotIndex];
+			//auto &slot = *g_slots[slotIndex];
 
 					if (!hasSupportForCurrentDualRange()) {
 						return;
@@ -511,8 +669,7 @@ struct DcpChannel : public Channel {
 	    void setDacVoltage(uint16_t value) override {
 
 			#if defined(EEZ_PLATFORM_STM32)
-					value = (uint16_t)clamp((float)value, (float)DAC_MIN, (float)DAC_MAX);
-					uSet = clamp(value, DAC_MIN, DAC_MAX);
+					set(USET, clamp(value, DAC_MIN, DAC_MAX));
 			#endif
 
 			#if defined(EEZ_PLATFORM_SIMULATOR)
@@ -521,28 +678,118 @@ struct DcpChannel : public Channel {
 			}
 
 		void setDacVoltageFloat(float value) override {
+/*
 			#if defined(EEZ_PLATFORM_STM32)
 					value = remap(value, 0, (float)DAC_MIN, params.U_MAX, (float)DAC_MAX);
-					uSet = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
+					value = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
+					set(USET, value, NO_RAMP);
 			#endif
+*/
+
+			value = remap(value, 0, (float)DAC_MIN, params.U_MAX, (float)DAC_MAX);
+			value = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
+
+			float previousUSet = uSet;
+
+			uSet = value;
+
+			/*if (slotIndex == 2) {
+				g_uSet = value;
+			}*/
+
+			bool bIsHwOvpEnabled = isHwOvpEnabled();
+
+			if (isOutputEnabled() && !io_pins::isInhibited()) {
+				bool belowThreshold = !isOverHwOvpThreshold();
+
+				if (value < previousUSet) {
+					fallingEdge = true;
+					fallingEdgePreviousUMonAdc = u.mon_adc;
+
+					uint32_t delay = belowThreshold || !bIsHwOvpEnabled ?
+						(dpOn ? CONF_FALLING_EDGE_SW_OVP_DELAY_MS : CONF_FALLING_EDGE_DP_OFF_DELAY_MS) :
+						CONF_FALLING_EDGE_HW_OVP_DELAY_MS;
+					fallingEdgeTimeout = millis() + delay;
+
+					if (bIsHwOvpEnabled) {
+						// deactivate HW OVP
+						prot_conf.flags.u_hwOvpDeactivated = 0; // this flag should be 0 while fallingEdge is true
+    					hwOvpEn = false;
+					}
+				} else if (belowThreshold) {
+					if (bIsHwOvpEnabled) {
+						// deactivate HW OVP
+						prot_conf.flags.u_hwOvpDeactivated = 1;
+    					hwOvpEn = false;
+					}
+				}
+			}
+
+			/*if (isOutputEnabled() || isDacTesting()) {
+				set(USET,value);
+				//set(USET, value, NO_RAMP);
+			} else {
+				set(USET,0);
+				//set(USET, 0, NO_RAMP);
+			}*/
+
+			set(USET, value, NO_RAMP);
+
+			if (!valueBalancing) {
+				uBeforeBalancing = NAN;
+				restoreCurrentToValueBeforeBalancing(*this);
+			}
 			}
 
 		void setDacCurrent(uint16_t value) override {
 			#if defined(EEZ_PLATFORM_STM32)
-					value = (uint16_t)clamp((float)value, (float)DAC_MIN, (float)DAC_MAX);
-					iSet = value;
+					set(ISET, clamp(value, DAC_MIN, DAC_MAX));
 			#endif
 	    	}
 
 		void setDacCurrentFloat(float value) override {
+
+/*
 			#if defined(EEZ_PLATFORM_STM32)
-					value = remap(value, /*params.I_MIN*/ 0, (float)DAC_MIN, /*params.I_MAX*/ I_MAX_FOR_REMAP, (float)DAC_MAX);
-					iSet = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
+					value = remap(value, 0, (float)DAC_MIN, params.I_MAX_FOR_REMAP, (float)DAC_MAX);
+					value = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
+					set(ISET, value, NO_RAMP);
 			#endif
+*/
+
+			value = remap(value, 0, (float)DAC_MIN, I_MAX_FOR_REMAP, (float)DAC_MAX);
+			value = (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX);
+
+			if (isOk() && isOutputEnabled() && flags.dprogState == DPROG_STATE_ON) {
+				if (dpOn) {
+					if (shouldDisableDP()) {
+						setDpEnable(false);
+					}
+				} else {
+					if (!shouldDisableDP()) {
+						setDpEnable(true);
+					}
+				}
+			}
+
+			iSet = value;
+
+			/*if (isOutputEnabled() || isDacTesting()) {
+				set(ISET, value, NO_RAMP);
+			}*/
+
+			set(ISET, value, NO_RAMP);
+
+
+			if (!valueBalancing) {
+				iBeforeBalancing = NAN;
+				restoreVoltageToValueBeforeBalancing(*this);
+			}
+
 			}
 
 		bool isDacTesting() override {
-			return false;
+			return m_testing;
 		}
 
 		bool isVoltageBalanced() const {
@@ -742,6 +989,55 @@ struct DcpChannel : public Channel {
 	        }
 	        return u.mon > ERROR_INPUT_VOLTAGE_WHEN_CHANNEL_IS_OFF;
 	    }
+
+	    void set(uint8_t buffer, uint16_t value, RampOption rampOption) {
+	        if (buffer == USET) {
+	            if (rampOption == WITH_RAMP && !ramp::isActive()) {
+	                m_uIsRampActive = true;
+	                m_uRampTargetValue = value;
+	                value = 0;
+	                rampOption = FROM_RAMP;
+	                m_uRampStartTimeUsec = micros();
+	            }
+
+	            m_uRampLastValue = value;
+
+	            if (rampOption != FROM_RAMP) {
+	                m_uIsRampActive = false;
+	            }
+
+	            m_uLastValue = value;
+	            uSet = value;  // <- direct update
+	        }
+	        else  {
+	            if (rampOption == WITH_RAMP && !ramp::isActive()) {
+	                m_iIsRampActive = true;
+	                m_iRampTargetValue = value;
+	                value = 0;
+	                rampOption = FROM_RAMP;
+	                m_iRampStartTimeUsec = micros();
+	            }
+
+	            m_iRampLastValue = value;
+
+	            if (rampOption != FROM_RAMP) {
+	                m_iIsRampActive = false;
+	            }
+
+	            m_iLastValue = value;
+	            iSet = value;  // <- direct update
+	        }
+
+	    	if (g_isBooted && !isPsuThread()) {
+	            DebugTrace("wrong thread 6\n");
+	        }
+
+	    }
+
+	    void set(uint8_t buffer, float value) {
+	        set(buffer, (uint16_t)clamp(round(value), DAC_MIN, DAC_MAX));
+	    }
+
 };
 
 struct DcpModule : public PsuModule {
@@ -796,13 +1092,6 @@ public:
         memset(buffer, 0, sizeof(DcpChannel));
 		return new (buffer) DcpChannel(slotIndex, channelIndex, subchannelIndex);
 	}
-
-/*#if defined(EEZ_PLATFORM_STM32)
-	void onSpiIrq() {
-		auto dcpChannel = (DcpChannel *)Channel::getBySlotIndex(slotIndex);
-		dcpChannel->spiIrq = true;
-	}
-#endif*/
 
     void onPowerDown() override {
 #if defined(EEZ_PLATFORM_STM32)
@@ -918,19 +1207,19 @@ public:
         outputSetValues[1] = channel1.iSet;
 
         uint32_t tickCounter = HAL_GetTick();
-                    	int32_t diff = tickCounter - lastAdcStartTickCounter;
-                    	if (lastAdcStartTickCounter == 0 || diff > 500) {
-                    	    for(int i = 0; i < (BUFFER_SIZE - 4) / 2; i++) {
-                    	    	if(!(output[0]==reg0_old))
+		int32_t diff = tickCounter - lastAdcStartTickCounter;
+		if (lastAdcStartTickCounter == 0 || diff > 500) {
+			for(int i = 0; i < (BUFFER_SIZE - 4) / 2; i++) {
+				if(!(output[0]==reg0_old))
 
-                    	    	{
-                    	            //printf("%d\t", ((uint16_t *)output)[i]);
-                    	    		printf("Reg0 %d\n", output[0]);
-                    	            reg0_old = output[0];
-                    	    	}
-                    	     }
-                    	        //printf("\n");
-                    	}
+				{
+					//printf("%d\t", ((uint16_t *)output)[i]);
+					printf("Reg0 %d\n", output[0]);
+					reg0_old = output[0];
+				}
+			 }
+				//printf("\n");
+		}
 
         //printf("voltage value is %d\n", output[2]);
         //printf("voltage value is %d\n", outputSetValues[4]);
@@ -938,44 +1227,43 @@ public:
         transfer();
 
         if (numCrcErrors == 0) {
-            uint16_t *inputSetValues = (uint16_t *)(input + 2);
-            	int subchannelIndex = 0;
-            //for (int subchannelIndex = 0; subchannelIndex < 2; subchannelIndex++) {
-                auto &channel = *(DcpChannel *)Channel::getBySlotIndex(slotIndex, subchannelIndex);
-                int offset = subchannelIndex * 2;
+			uint16_t *inputSetValues = (uint16_t *)(input + 2);
+			int subchannelIndex = 0;
+			//for (int subchannelIndex = 0; subchannelIndex < 2; subchannelIndex++) {
+			auto &channel = *(DcpChannel *)Channel::getBySlotIndex(slotIndex, subchannelIndex);
+			int offset = subchannelIndex * 2;
 
-                channel.ccMode = (input[0] & REG0_CC_MASK) != 0;
+			channel.ccMode = (input[0] & REG0_CC_MASK) != 0;
 
-                uint16_t uMonAdc = inputSetValues[offset];
-                channel.uMonAdc = uMonAdc;
-                float uMon = remap(uMonAdc, (float)ADC_MIN, 0, (float)ADC_MAX, channel.params.U_MAX);
-                channel.onAdcData(ADC_DATA_TYPE_U_MON, uMon);
+			uint16_t uMonAdc = inputSetValues[offset];
+			channel.uMonAdc = uMonAdc;
+			float uMon = remap(uMonAdc, (float)ADC_MIN, 0, (float)ADC_MAX, channel.params.U_MAX);
+			channel.onAdcData(ADC_DATA_TYPE_U_MON, uMon);
 
-                uint16_t iMonAdc = inputSetValues[offset + 1];
-                channel.iMonAdc = iMonAdc;
-                const float FULL_SCALE = 2.5F;
-                const float U_REF = 2.5F;
-                float iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP);
-                iMon = roundPrec(iMon, I_MON_RESOLUTION);
-                channel.onAdcData(ADC_DATA_TYPE_I_MON, iMon);
+			uint16_t iMonAdc = inputSetValues[offset + 1];
+			channel.iMonAdc = iMonAdc;
+			const float FULL_SCALE = 2.5F;
+			const float U_REF = 2.5F;
+			float iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP);
+			iMon = roundPrec(iMon, I_MON_RESOLUTION);
+			channel.onAdcData(ADC_DATA_TYPE_I_MON, iMon);
 
-#if !CONF_SKIP_PWRGOOD_TEST
-                bool pwrGood = input[0] & REG0_PWRGOOD_MASK ? true : false;
-                if (!pwrGood) {
-                    generateChannelError(SCPI_ERROR_CH1_FAULT_DETECTED, channel.channelIndex);
-                    powerDownOnlyPowerChannels();
-                }
-#endif
-                bool hwOvp = input[1] & REG1_HW_OVP_MASK ? true : false;
-                if (hwOvp) {
-                	//generateChannelError(SCPI_ERROR_CH2_OUTPUT_FAULT_DETECTED,channel.channelIndex);
-                	channel.callHwOvpProtectionEnter();
-                }
+			#if !CONF_SKIP_PWRGOOD_TEST
+				bool pwrGood = input[0] & REG0_PWRGOOD_MASK ? true : false;
+				if (!pwrGood) {
+					generateChannelError(SCPI_ERROR_CH1_FAULT_DETECTED, channel.channelIndex);
+					powerDownOnlyPowerChannels();
+				}
+			#endif
+			channel.hwOvpFlag = input[1] & REG1_HW_OVP_MASK ? true : false;
+			if (channel.hwOvpFlag) {
+				channel.callHwOvpProtectionEnter();
+			}
 
-                channel.rPol = input[1] & REG1_RPOL_MASK ? true : false;
+			channel.rPol = input[1] & REG1_RPOL_MASK ? true : false;
 
-                uint16_t tempAdc = inputSetValues[offset + 2];
-                channel.temperature = calcTemperature(tempAdc);
+			uint16_t tempAdc = inputSetValues[offset + 2];
+			channel.temperature = calcTemperature(tempAdc);
 
             //}
         }
@@ -1078,16 +1366,142 @@ bool DcpChannel::test() {
 }
 
 void DcpChannel::tickSpecific() {
-#if defined(EEZ_PLATFORM_STM32)
-    if (subchannelIndex == 0) {
-        ((DcpModule *)g_slots[slotIndex])->tick(slotIndex);
+	#if defined(EEZ_PLATFORM_STM32)
+		if (subchannelIndex == 0) {
+			((DcpModule *)g_slots[slotIndex])->tick(slotIndex);
+		}
+	#endif
+
+	if (flags.dprogState == DPROG_STATE_ON) {
+		// turn off DP after delay
+		if (delayed_dp_off && (millis() - delayed_dp_off_start) >= DP_OFF_DELAY_PERIOD) {
+			delayed_dp_off = false;
+			setDpEnable(false);
+		}
+	}
+
+	if (isOutputEnabled() && !io_pins::isInhibited()) {
+		/// Output power is monitored and if its go below DP_NEG_LEV
+		/// that is negative value in Watts (default -1 W),
+		/// and that condition lasts more then DP_NEG_DELAY seconds (default 5 s),
+		/// down-programmer circuit has to be switched off.
+		uint32_t tickCountMs = millis();
+		if (u.mon_last * i.mon_last >= DP_NEG_LEV) {
+			dpNegMonitoringTimeMs = 0;
+		} else {
+			if (dpNegMonitoringTimeMs == 0) {
+				dpNegMonitoringTimeMs = tickCountMs;
+				if (dpNegMonitoringTimeMs == 0) {
+					dpNegMonitoringTimeMs = 1;
+				}
+			} else {
+				if (tickCountMs - dpNegMonitoringTimeMs > DP_NEG_DELAY * 1000UL) {
+					if (dpOn) {
+						// DebugTrace("CH%d, neg. P, DP off: %f", channelIndex + 1, u.mon_last * i.mon_last);
+						dpNegMonitoringTimeMs = 0;
+						channel_dispatcher::outputEnable(*this, false, nullptr);
+						generateChannelError(SCPI_ERROR_CH1_DOWN_PROGRAMMER_SWITCHED_OFF, channelIndex);
+						return;
+					} else {
+						// DebugTrace("CH%d, neg. P, output off: %f", channelIndex + 1, u.mon_last * i.mon_last);
+						generateChannelError(SCPI_ERROR_CH1_OUTPUT_FAULT_DETECTED, channelIndex);
+						channel_dispatcher::outputEnable(*this, false, nullptr);
+					}
+				} else if (tickCountMs - dpNegMonitoringTimeMs > 500UL) {
+					if (dpOn && channelIndex < 2) {
+						if (channel_dispatcher::getCouplingType() == channel_dispatcher::COUPLING_TYPE_SERIES) {
+							psu::Channel &otherChannel = psu::Channel::get(channelIndex == 0 ? 1 : 0);
+							voltageBalancing(otherChannel);
+						} else if (channel_dispatcher::getCouplingType() == channel_dispatcher::COUPLING_TYPE_PARALLEL) {
+							psu::Channel &otherChannel = psu::Channel::get(channelIndex == 0 ? 1 : 0);
+							currentBalancing(otherChannel);
+						}
+					}
+				}
+			}
+		}
+	}
+
+    if (channelIndex < 2 && channel_dispatcher::getCouplingType() == channel_dispatcher::COUPLING_TYPE_SERIES) {
+        unsigned cvMode = isInCvMode() ? 1 : 0;
+        if (cvMode != flags.cvMode) {
+            restoreVoltageToValueBeforeBalancing(psu::Channel::get(channelIndex == 0 ? 1 : 0));
+        }
     }
-#endif
+
+    if (channelIndex < 2 && channel_dispatcher::getCouplingType() == channel_dispatcher::COUPLING_TYPE_PARALLEL) {
+        unsigned ccMode = isInCcMode() ? 1 : 0;
+	    if (ccMode != flags.ccMode) {
+			restoreCurrentToValueBeforeBalancing(psu::Channel::get(channelIndex == 0 ? 1 : 0));
+		}
+	}
+
+	if (fallingEdge) {
+		fallingEdge =
+			(int32_t(fallingEdgeTimeout - millis()) > 0) ||
+			(fallingEdgePreviousUMonAdc > u.mon_adc) ||
+			(u.mon_last > uSet * (1.0f + CONF_FALLING_EDGE_OVP_PERCENTAGE / 100.0f));
+
+		if (fallingEdge) {
+			fallingEdgePreviousUMonAdc = u.mon_adc;
+		}
+	}
+
+	// HW OVP handling
+	if (hwOvpFlag) {
+		if (!fallingEdge && isHwOvpEnabled() && hwOvpEn) {
+			if (isOverHwOvpThreshold()) {
+				// activate HW OVP
+				prot_conf.flags.u_hwOvpDeactivated = 0;
+				hwOvpEn = true;
+			} else {
+				prot_conf.flags.u_hwOvpDeactivated = 1;
+			}
+		} else if ((fallingEdge || !isHwOvpEnabled()) && hwOvpEn) {
+			// deactivate HW OVP
+			prot_conf.flags.u_hwOvpDeactivated = fallingEdge ? 0 : 1;
+			hwOvpEn = false;
+		}
+
+		// Check continuously output voltage when output is enabled if OVP is not enabled.
+		// If U_MON is higher then U_SET for more then 3% automatically switch off output and display popup.
+		if (!fallingEdge && !isOvpEnabled() && !isRemoteProgrammingEnabled() && u.set > 1.0f && u.mon_last > u.set * 1.03f) {
+			DebugTrace("U_MON (%.4g) is more then 3%% above U_SET (%.4g), difference is: %.4g\n", u.mon_last, u.set * 1.03f, u.mon_last - u.set * 1.03f);
+			trigger::abort();
+			channel_dispatcher::outputEnable(*this, false, nullptr);
+			generateChannelError(SCPI_ERROR_CH1_MODULE_FAULT_DETECTED, channelIndex);
+			return;
+		}
+	}
 
 }
 
 static DcpModule g_dcpModule;
 Module *g_module = &g_dcpModule;
+
+bool isDacRampActive() {
+	for (int i = 0; i < CH_NUM; i++) {
+		auto &channel = Channel::get(i);
+		if (g_slots[channel.slotIndex]->moduleType == MODULE_TYPE_DCP242) {
+			if (isRampActive()) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void tickDacRamp() {
+	for (int i = 0; i < CH_NUM; i++) {
+		auto &channel = Channel::get(i);
+		if (g_slots[channel.slotIndex]->moduleType == MODULE_TYPE_DCP242) {
+			if (isRampActive()) {
+				//dactick();
+			}
+		}
+	}
+}
+
 } // namespace DCP242
 
 namespace gui {
