@@ -122,7 +122,7 @@ static const uint16_t ADC_MAX = 32767;
 #define BUFFER_SIZE 14
 
 static const float PTOT = 40.0f;
-static const float I_MON_RESOLUTION = 0.02f;
+static const float I_MON_RESOLUTION = 0.001f;
 
 #define REG0_OE_MASK      		(1 << 0)  //output
 #define REG0_CC_MASK      		(1 << 1)  //input
@@ -133,7 +133,7 @@ static const float I_MON_RESOLUTION = 0.02f;
 #define REG0_HW_OVP_EN_MASK		(1 << 6)  //output
 
 
-#define REG1_C_RANGE_MASK	  	(1 << 0)  //output  0= 5A; 1 = 50ma
+#define REG1_C_RANGE_MASK	  	(1 << 0)  //output  0= 5A; 1 = 250ma
 #define REG1_HW_OVP_MASK		(1 << 1)  //input
 #define REG1_RPOL_MASK			(1 << 2)  //input
 
@@ -166,7 +166,7 @@ struct DcpChannel : public Channel {
 		bool r_prog;
 		bool hwOvpEn;
 		bool hwOvpFlag = false;
-		bool currentRangeLow; //0 = 5A; 1 = 50ma
+		bool currentRangeLow; //0 = 5A; 1 = 250ma
 		bool rPol;
 
 		bool delayed_dp_off;
@@ -199,7 +199,7 @@ struct DcpChannel : public Channel {
 	    float temperature = 25.0f;
 
 		float I_MAX_FOR_REMAP;
-
+		float I_MAX_FOR_REMAP_LOW;
 		float U_CAL_POINTS[2];
 		float I_CAL_POINTS[2];
 		float I_LOW_RANGE_CAL_POINTS[2];
@@ -270,9 +270,9 @@ struct DcpChannel : public Channel {
 
 			params.PTOT = MIN(params.U_MAX * params.I_MAX, 62.5f);
 
-			params.U_RESOLUTION = 0.005f;
+			params.U_RESOLUTION = 0.001f;
 			params.U_RESOLUTION_DURING_CALIBRATION = 0.0001f;
-			params.I_RESOLUTION = 0.0005f;
+			params.I_RESOLUTION = 0.0001f;
 			params.I_RESOLUTION_DURING_CALIBRATION = 0.00001f;
 			params.I_LOW_RESOLUTION = 0.000005f;
 			params.I_LOW_RESOLUTION_DURING_CALIBRATION = 0.0000001f;
@@ -295,6 +295,7 @@ struct DcpChannel : public Channel {
 			params.ADC_MAX = ADC_MAX;
 
 			I_MAX_FOR_REMAP = 2.500f;
+			I_MAX_FOR_REMAP_LOW = 0.250f;
 
 			params.U_RAMP_DURATION_MIN_VALUE = 0.002f;
 
@@ -1206,7 +1207,7 @@ public:
         outputSetValues[0] = channel1.uSet;
         outputSetValues[1] = channel1.iSet;
 
-        uint32_t tickCounter = HAL_GetTick();
+        /*uint32_t tickCounter = HAL_GetTick();
 		int32_t diff = tickCounter - lastAdcStartTickCounter;
 		if (lastAdcStartTickCounter == 0 || diff > 500) {
 			for(int i = 0; i < (BUFFER_SIZE - 4) / 2; i++) {
@@ -1219,7 +1220,7 @@ public:
 				}
 			 }
 				//printf("\n");
-		}
+		}*/
 
         //printf("voltage value is %d\n", output[2]);
         //printf("voltage value is %d\n", outputSetValues[4]);
@@ -1244,7 +1245,13 @@ public:
 			channel.iMonAdc = iMonAdc;
 			const float FULL_SCALE = 2.5F;
 			const float U_REF = 2.5F;
-			float iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP);
+			float iMon;
+			if (channel.currentRangeLow) {
+				iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP_LOW);
+			} else {
+				iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP);
+			}
+			//float iMon = remap(iMonAdc, (float)ADC_MIN, 0, FULL_SCALE * ADC_MAX / U_REF, /*params.I_MAX*/ channel.I_MAX_FOR_REMAP);
 			iMon = roundPrec(iMon, I_MON_RESOLUTION);
 			channel.onAdcData(ADC_DATA_TYPE_I_MON, iMon);
 

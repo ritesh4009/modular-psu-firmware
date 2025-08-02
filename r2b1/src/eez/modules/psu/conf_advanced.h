@@ -118,7 +118,7 @@
 /// This is the delay period, after the channel output went OFF,
 /// after which we shall turn DP off.
 /// Value is given in milliseconds.
-#define DP_OFF_DELAY_PERIOD 10
+#define DP_OFF_DELAY_PERIOD 100
 
 /// Text returned by the SYStem:CAPability command
 #define STR_SYST_CAP "DCPSUPPLY WITH (MEASURE|MULTIPLE|TRIGGER)"

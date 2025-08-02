@@ -315,8 +315,8 @@ public:
         unsigned triggerOutputState : 1;
         unsigned triggerOnListStop : 3;
         unsigned currentRangeSelectionMode : 2; // see enum CurrentRangeSelectionMode
-        unsigned autoSelectCurrentRange : 1;    // switch between 5A/50mA depending on Imon
-        unsigned currentCurrentRange : 1;       // 0: 5A, 1:50mA
+        unsigned autoSelectCurrentRange : 1;    // switch between 5A/250mA depending on Imon
+        unsigned currentCurrentRange : 1;       // 0: 5A, 1:250mA
         unsigned trackingEnabled : 1;
         unsigned dprogState: 2;
     };
